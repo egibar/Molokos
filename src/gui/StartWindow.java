@@ -90,6 +90,8 @@ public class StartWindow extends JFrame {
 		JButton btnComprarDivisas = new JButton("Comprar Divisas");
 		btnComprarDivisas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JFrame a = new ComprarDivisas();
+				a.setVisible(true);
 			}
 		});
 		btnComprarDivisas.setForeground(Color.BLACK);
@@ -112,6 +114,12 @@ public class StartWindow extends JFrame {
 		btnHacerTransferencia.setBackground(UIManager.getColor("Button.background"));
 		btnHacerTransferencia.setBounds(57, 208, 228, 53);
 		panelMain.add(btnHacerTransferencia);
+		btnHacerTransferencia.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		JFrame a = new HacerTransferencia();
+		a.setVisible(true);
+	}
+});
 	}
 
 	private JMenuBar getMenuBar_1() {
@@ -129,8 +137,6 @@ public class StartWindow extends JFrame {
 			mnComprar = new JMenu("Comprar/Vender");
 			mnComprar.add(getMntmComprarDivisas());
 			mnComprar.add(getMntmVenderDivisas());
-			mnComprar.add(getSeparator());
-			mnComprar.add(getMntmComprarDivisas());
 		}
 		return mnComprar;
 	}
