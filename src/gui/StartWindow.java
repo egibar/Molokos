@@ -112,7 +112,7 @@ public class StartWindow extends JFrame {
 		JButton btnHacerTransferencia = new JButton("Hacer Transferencia");
 		btnHacerTransferencia.setForeground(Color.BLACK);
 		btnHacerTransferencia.setBackground(UIManager.getColor("Button.background"));
-		btnHacerTransferencia.setBounds(57, 208, 228, 53);
+		btnHacerTransferencia.setBounds(57, 212, 228, 53);
 		panelMain.add(btnHacerTransferencia);
 		btnHacerTransferencia.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -154,7 +154,7 @@ public class StartWindow extends JFrame {
 	private JMenu getMnListado() {
 		if (mnListado == null) {
 			mnListado = new JMenu("Listado");
-			mnListado.add(getSeparator());
+			//mnListado.add(getSeparator());
 			mnListado.add(getMntmObtenerListado());
 		}
 		return mnListado;
