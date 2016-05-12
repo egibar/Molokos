@@ -1,29 +1,17 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
-import businessLogic.ApplicationFacadeInterface;
-import domain.User;
-import exceptions.OverlappingUserExists;
+import businessLogic.ApplicationFacadeInterfaceWS;
 
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
-import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
-
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.text.ParseException;
 import java.util.Date;
-import java.awt.event.ActionEvent;
 
 public class ComprarDivisas extends JFrame {
 
@@ -32,10 +20,12 @@ public class ComprarDivisas extends JFrame {
 	private JTextField textCantidad;
 	private JTextField textCuenta;
 	private JButton btnComprar;
-	
+
 	private String divisa;
-	private int cantidad;
+	private String cantidad;
 	private String bankAccount;
+	protected Component frame;
+
 
 	/**
 	 * Launch the application.
@@ -63,63 +53,81 @@ public class ComprarDivisas extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JLabel lblComparDivisas = new JLabel("COMPAR DIVISAS");
-		lblComparDivisas.setFont(new Font("Courier 10 Pitch", Font.BOLD, 24));
-		lblComparDivisas.setBounds(140, 12, 247, 47);
-		contentPane.add(lblComparDivisas);
-		
-		JLabel lblDivisa = new JLabel("Introduce Divisa");
-		lblDivisa.setBounds(35, 74, 130, 15);
-		contentPane.add(lblDivisa);
-		
-		JLabel lblCantidad = new JLabel("Introduce Cantidad");
-		lblCantidad.setBounds(35, 130, 145, 15);
-		contentPane.add(lblCantidad);
-		
-		JLabel lblCuenta = new JLabel("Introduce Cuenta");
-		lblCuenta.setBounds(35, 188, 145, 15);
-		contentPane.add(lblCuenta);
-		
-		textDivisa = new JTextField();
-		textDivisa.setBounds(208, 71, 114, 19);
-		contentPane.add(textDivisa);
-		textDivisa.setColumns(10);
-		
-		textCantidad = new JTextField();
-		textCantidad.setText("");
-		textCantidad.setBounds(208, 128, 114, 19);
-		contentPane.add(textCantidad);
-		textCantidad.setColumns(10);
-		
-		MaskFormatter mascara;
-		try {
-			mascara = new MaskFormatter("####-####-##-##########");
-			textCuenta = new JFormattedTextField(mascara);
 
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		textCuenta = new JTextField();
-		textCuenta.setText("");
-		textCuenta.setBounds(208, 186, 114, 19);
-		contentPane.add(textCuenta);
-		textCuenta.setColumns(10);
-		
-		private JButton getJButton() {
-			btnComprar = new JButton("Comprar");
-			btnComprar.setBounds(164, 246, 158, 47);
-			contentPane.add(btnComprar);
+
+		this.setSize(671, 649);
+		this.setResizable(false);
+		this.setLocationRelativeTo(null);
+		getContentPane().setLayout(null);
+
+		setLabels();
+		setFields();
+		getJButton();
+
+		this.addWindowListener(new WindowListener() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+
+			}
+
+			@Override
+			public void windowClosing(WindowEvent e) {
+
+				if (true) {
+
+					int res = JOptionPane.showConfirmDialog(null,
+							"¿Estás seguro que quieres descartar los cambios?", null, JOptionPane.YES_NO_OPTION);
+					if (res == JOptionPane.YES_OPTION)
+						setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					else
+						setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+
+				} else
+					dispose();
+			}
+
+			@Override
+			public void windowClosed(WindowEvent e) {
+
+			}
+
+			@Override
+			public void windowIconified(WindowEvent e) {
+
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+
+			}
+
+			@Override
+			public void windowActivated(WindowEvent e) {
+
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+
+			}
+
+		});
+		setVisible(true);
+
+	}
+	private JButton getJButton() {
+		btnComprar = new JButton("Comprar");
+		btnComprar.setBounds(164, 246, 158, 47);
+		contentPane.add(btnComprar);
 		btnComprar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (textCuenta.isEditValid()) {
+				/*if (textCuenta.isEditValid()) {
 					try {
 
 						ApplicationFacadeInterface facade = StartWindow.getBusinessLogic();
 
 						divisa = textDivisa.getText();
-						cantidad = textCantidad.getText();
+						cantidad = Integer.parseInt(textCantidad.getText());
 						bankAccount = textCuenta.getText();
 						java.util.Date fecha = new Date();
 						if (!checkEmptyFields()) {
@@ -154,13 +162,81 @@ public class ComprarDivisas extends JFrame {
 
 				}else{
 					JOptionPane.showMessageDialog(null, "Please insert the 20 digits of the bankaccount");				}
+			}*/
+				btnComprar.doClick();
+
 			}
-			
 		});
 		return btnComprar;
 	}
 
-	
+	private void setFields(){
+
+		textDivisa = new JTextField();
+		textDivisa.setBounds(208, 71, 114, 19);
+		contentPane.add(textDivisa);
+		textDivisa.setColumns(10);
+
+	//	textCuenta = new JTextField();
+	//	textCuenta.setText("");
+
+		MaskFormatter mascara;
+		try {
+			mascara = new MaskFormatter("####-####-##-##########");
+			textCuenta = new JFormattedTextField(mascara);
+
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		textCuenta.setBounds(208, 186, 114, 19);
+		contentPane.add(textCuenta);
+		textCuenta.setColumns(10);
+
+		textCantidad = new JTextField();
+		textCantidad.setText("");
+		textCantidad.setBounds(208, 128, 114, 19);
+		contentPane.add(textCantidad);
+		textCantidad.setColumns(10);
+		textCantidad.addFocusListener(new FocusListener() {
+			@Override
+			public void focusGained(FocusEvent e) {
+
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				try {
+					Integer.parseInt(textCantidad.getText());
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(frame,
+							"Eso no es un número, mete un número",
+							"Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+
+	}
+	private void setLabels() {
+		JLabel lblComparDivisas = new JLabel("COMPAR DIVISAS");
+		lblComparDivisas.setFont(new Font("Courier 10 Pitch", Font.BOLD, 24));
+		lblComparDivisas.setBounds(140, 12, 247, 47);
+		contentPane.add(lblComparDivisas);
+
+		JLabel lblDivisa = new JLabel("Introduce Divisa");
+		lblDivisa.setBounds(35, 74, 130, 15);
+		contentPane.add(lblDivisa);
+
+		JLabel lblCantidad = new JLabel("Introduce Cantidad");
+		lblCantidad.setBounds(35, 130, 145, 15);
+		contentPane.add(lblCantidad);
+
+		JLabel lblCuenta = new JLabel("Introduce Cuenta");
+		lblCuenta.setBounds(35, 188, 145, 15);
+		contentPane.add(lblCuenta);
+	}
+
 	private boolean checkEmptyFields() {
 		String message = "Please fill in all the fields";
 		if (bankAccount.trim().equals("") || divisa.trim().equals("")
