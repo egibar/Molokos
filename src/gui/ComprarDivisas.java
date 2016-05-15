@@ -7,9 +7,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
 import businessLogic.ApplicationFacadeInterfaceWS;
+import domain.Cuenta;
+import domain.Operacion;
+import domain.Sucursal;
 
 
 import java.awt.event.*;
+import java.awt.geom.Arc2D;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -22,10 +26,9 @@ public class ComprarDivisas extends JFrame {
 	private JButton btnComprar;
 
 	private String divisa;
-	private String cantidad;
+	private Double cantidad;
 	private String bankAccount;
 	protected Component frame;
-
 
 	/**
 	 * Launch the application.
@@ -121,20 +124,20 @@ public class ComprarDivisas extends JFrame {
 		contentPane.add(btnComprar);
 		btnComprar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*if (textCuenta.isEditValid()) {
+				if (textCuenta.isEditValid()) {
 					try {
 
-						ApplicationFacadeInterface facade = StartWindow.getBusinessLogic();
+						ApplicationFacadeInterfaceWS facade = StartWindow.getBusinessLogic();
 
 						divisa = textDivisa.getText();
-						cantidad = Integer.parseInt(textCantidad.getText());
+						cantidad = Double.parseDouble(textCantidad.getText());
 						bankAccount = textCuenta.getText();
 						java.util.Date fecha = new Date();
 						if (!checkEmptyFields()) {
 							if (showConfirmDialog()) {
 
-									Sucursal s = facade.GetSucursal(bankAccount,divisa);
-									Cuenta c = facade.getCuenta(bankAccount);
+									Sucursal s = facade.GetSucursal(nombreSucursal,divisa);
+									Cuenta c = facade.GetCuenta(bankAccount);
 									int cobro = c.getComision()*cantidad;
 									if (cantidad>s.getCantidad)
 										showErrorCantidad();
@@ -162,10 +165,8 @@ public class ComprarDivisas extends JFrame {
 
 				}else{
 					JOptionPane.showMessageDialog(null, "Please insert the 20 digits of the bankaccount");				}
-			}*/
-				btnComprar.doClick();
-
 			}
+
 		});
 		return btnComprar;
 	}

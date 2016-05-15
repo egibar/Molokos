@@ -13,8 +13,7 @@ import configuration.ConfigXML;
 import dataAccess.DataAccess;
 
 //import domain.Booking;
-import domain.Offer;
-import domain.RuralHouse;
+import domain.*;
 import exceptions.BadDates;
 import exceptions.OverlappingOfferExists;
 
@@ -60,7 +59,7 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 	 *            number, start day, last day and price
 	 * @return the created offer, or null, or an exception
 	 */
-	public Offer createOffer(RuralHouse ruralHouse, Date firstDay, Date lastDay,
+	/*public Offer createOffer(RuralHouse ruralHouse, Date firstDay, Date lastDay,
 			float price) throws OverlappingOfferExists, BadDates {
 		System.out.println("Executing createOffer");
 		System.out.println(firstDay);
@@ -104,7 +103,7 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 	 * @return the first offer that overlaps with those dates, or null if there is no overlapping offer
 	 */
 
-	@WebMethod public Vector<Offer> getOffers( RuralHouse rh, Date firstDay,  Date lastDay) {
+	/*@WebMethod public Vector<Offer> getOffers( RuralHouse rh, Date firstDay,  Date lastDay) {
 		
 		DataAccess dB4oManager=new DataAccess();
 		Vector<Offer>  offers=new Vector<Offer>();
@@ -112,7 +111,7 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 		dB4oManager.close();
 
 		return offers;
-	}	
+	}	*/
 		
 		
 	
@@ -131,10 +130,30 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 		dB4oManager.close();
 
 	}
+	public Sucursal GetSucursal(String nombre, Divisas divisa){
+			System.out.println("Start: GetSucursal");
 
+			DataAccess dB4oManager=new DataAccess();
 
+			Sucursal s=dB4oManager.GetSucursal(nombre);
+			dB4oManager.close();
+			System.out.println("End: GetSucursal");
 
-	 
+			return s;
+
+		}
+	public Cuenta GetCuenta(Cuenta bankAccount){
+		System.out.println("Start: GetCuenta");
+
+		DataAccess dB4oManager=new DataAccess();
+
+		Cuenta c=dB4oManager.GetCuenta(numero);
+		dB4oManager.close();
+		System.out.println("End: GetCuenta");
+
+		return c;
 
 	}
+
+}
 

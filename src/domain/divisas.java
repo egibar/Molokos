@@ -12,10 +12,10 @@ public class Divisas {
      *
      */
     private int Cantidad; //COMPROBAR SI LA COMISION IRIA AQUI
-    private int Valor;
+    private float Valor;
     private String Nombre;
 
-    public Divisas(int cantidad, int valor, String nombre) {
+    public Divisas(int cantidad, float valor, String nombre) {
         Cantidad = cantidad;
         Valor = valor;
         Nombre = nombre;
@@ -29,11 +29,11 @@ public class Divisas {
         Cantidad = cantidad;
     }
 
-    public int getValor() {
+    public float getValor() {
         return Valor;
     }
 
-    public void setValor(int valor) {
+    public void setValor(float valor) {
         Valor = valor;
     }
 

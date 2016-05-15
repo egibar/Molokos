@@ -58,6 +58,13 @@ public class StartWindow extends JFrame {
 		});
 	}
 
+
+	public static ApplicationFacadeInterfaceWS facadeInterface;
+	public static ApplicationFacadeInterfaceWS getBusinessLogic() {
+		return facadeInterface;
+	}
+
+
 	/**
 	 * Create the frame.
 	 */

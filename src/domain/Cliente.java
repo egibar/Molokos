@@ -13,9 +13,9 @@ public class Cliente {
      */
     private String Nombre;
     private String Apellido;
-    private int DNI;
+    private String DNI;
 
-    public Cliente(String nombre, String apellido, int DNI) {
+    public Cliente(String nombre, String apellido, String DNI) {
         Nombre = nombre;
         Apellido = apellido;
         this.DNI = DNI;
@@ -37,11 +37,11 @@ public class Cliente {
         Apellido = apellido;
     }
 
-    public int getDNI() {
+    public String getDNI() {
         return DNI;
     }
 
-    public void setDNI(int DNI) {
+    public void setDNI(String DNI) {
         this.DNI = DNI;
     }
 }

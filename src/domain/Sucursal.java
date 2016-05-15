@@ -17,18 +17,18 @@ public class Sucursal implements Serializable {
     /**
      *
      */
-    private int Comision; //COMPROBAR SI LA COMISION IRIA AQUI
+    private double Comision; //COMPROBAR SI LA COMISION IRIA AQUI
     private String Direccion;
     private String Nombre;
 
-    public Sucursal(int Comision, String Direccion, String Nombre) {
+    public Sucursal( double Comision, String Direccion, String Nombre) {
         this.Comision=Comision;
         this.Direccion=Direccion;
         this.Nombre=Nombre;
 
     }
 
-    public void setComision(int comision) {
+    public void setComision(double comision) {
         Comision = comision;
     }
 
@@ -48,7 +48,7 @@ public class Sucursal implements Serializable {
         Nombre = nombre;
     }
 
-    public int getComision() {
+    public double getComision() {
         return Comision;
     }
 

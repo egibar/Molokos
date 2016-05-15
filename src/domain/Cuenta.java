@@ -11,13 +11,25 @@ public class Cuenta {
     /**
      *
      */
+    private String DNI;
     private int Numero; //COMPROBAR SI LA COMISION IRIA AQUI
-    private int Saldo;
+    private double Saldo;
 
-    public Cuenta(int numero, int saldo) {
-
+    public Cuenta(String DNI, int numero, double saldo) {
+        this.DNI = DNI;
         Numero = numero;
         Saldo = saldo;
+    }
+
+    public Cuenta() {
+    }
+
+    public String getDNI() {
+        return DNI;
+    }
+
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
     }
 
     public int getNumero() {
@@ -28,22 +40,21 @@ public class Cuenta {
         Numero = numero;
     }
 
-    public int getSaldo() {
+    public double getSaldo() {
         return Saldo;
     }
 
-    public void setSaldo(int saldo) {
+    public void setSaldo(double saldo) {
         Saldo = saldo;
     }
 
     @Override
     public String toString() {
         return "Cuenta{" +
-                "Numero=" + Numero +
+                "DNI='" + DNI + '\'' +
+                ", Numero=" + Numero +
                 ", Saldo=" + Saldo +
                 '}';
     }
-
-
 
 }

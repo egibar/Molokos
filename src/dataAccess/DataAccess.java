@@ -1,6 +1,7 @@
 package dataAccess;
 
 
+import java.security.acl.Owner;
 import java.util.Date;
 import java.util.ListIterator;
 import java.util.Vector;
@@ -16,8 +17,7 @@ import com.db4o.cs.config.ClientConfiguration;
 
 import configuration.ConfigXML;
 //import domain.Booking;
-import domain.Offer;
-import domain.RuralHouse;
+import domain.*;
 import exceptions.OverlappingOfferExists;
 
 public class DataAccess  {
@@ -66,22 +66,32 @@ public class DataAccess  {
 	public void initializeDB(){
 		
 		System.out.println("Db initialized");
-		RuralHouse rh1=new RuralHouse(1, "Ezkioko etxea","Ezkio");
-		 RuralHouse rh2=new RuralHouse(2, "Etxetxikia","Iru�a");
-		 RuralHouse rh3=new RuralHouse(3, "Udaletxea","Bilbo");
-		 RuralHouse rh4=new RuralHouse(4, "Gaztetxea","Renteria");
+		Sucursal s1=new Sucursal(1.5, "Gros","Avenida Miracruz");
+		Sucursal s2=new Sucursal(1.2, "Amara","Anoeta");
+		Divisas d1=new Divisas(300, 1,"Dolar");
+		Divisas d2=new Divisas(500, 3,"Libra");
+		Cliente c1= new Cliente("Asier","Egibar","72526101V");
+		Cliente c2= new Cliente("Asier","Blazkez","4586798C");
+		Cuenta cuenta1= new Cuenta("72526101V",1111-1111-11-111111111, 300);
+		Cuenta cuenta2= new Cuenta("72526101V",1234-5678-91-234567891, 1000);
 
-		 db.store(rh1);
-		 db.store(rh2);
-		 db.store(rh3);
-		 db.store(rh4);
+
+
+		db.store(s1);
+		db.store(s2);
+		db.store(d1);
+		db.store(d2);
+		db.store(c1);
+		db.store(c2);
+		db.store(cuenta1);
+		db.store(cuenta2);
 		 
-		 theDB4oManagerAux=new DB4oManagerAux(1);
+		theDB4oManagerAux=new DB4oManagerAux(1);
 		 
-		 db.store(theDB4oManagerAux);
+		db.store(theDB4oManagerAux);
 
 		 
-		 db.commit();
+		db.commit();
 	}
 	
 	public Offer createOffer(RuralHouse ruralHouse, Date firstDay, Date lastDay, float price) {
@@ -111,16 +121,16 @@ public class DataAccess  {
 	}
 	
 	
-	public Vector<RuralHouse> getAllRuralHouses() {
+	public Vector<Cuenta> getAllCuentas(String DNI) {
 
 
 		 try {
-			 RuralHouse proto = new RuralHouse(null,null,null);
-			 ObjectSet<RuralHouse> result = db.queryByExample(proto);
-			 Vector<RuralHouse> ruralHouses=new Vector<RuralHouse>();
+			 Cuenta proto = new Cuenta(DNI);
+			 ObjectSet<Cuenta> result = db.queryByExample(proto);
+			 Vector<Cuenta> cuenta=new Vector<Cuenta>();
 			 while(result.hasNext()) 
-				 ruralHouses.add(result.next());
-			 return ruralHouses;
+				 cuenta.add(result.next());
+			 return cuenta;
 	     } finally {
 	         //db.close();
 	     }
@@ -150,4 +160,37 @@ public class DataAccess  {
 		db.close();
 		System.out.println("DataBase closed");
 	}
+	public Vector<Sucursal> GetSucursal(String nombre){
+
+			try {
+				Sucursal proto = new Sucursal(null, null, nombre);
+				ObjectSet<Object> result = db.queryByExample(proto);
+
+				Vector<Sucursal> sucursal = new Vector<Sucursal>();
+				while (result.hasNext())
+					sucursal.add((Sucursal) result.next());
+				return sucursal;
+			} finally {
+				// db.close();
+			}
+	}
+	public Vector<Cuenta> GetCuenta(int numero) {
+		try {
+			Cuenta proto = new Cuenta(numero,);
+			ObjectSet<Object> result = db.queryByExample(proto);
+			/*
+			 * proto = new Owner(null, null, null, false, null); result.addAll(db.queryByExample(proto));
+			 */
+			Vector<Cuenta> cuenta = new Vector<Cuenta>();
+			while (result.hasNext())
+				cuenta.add((Cuenta) result.next());
+			return cuenta;
+		} finally {
+			// db.close();
+		}
+
+	}
+
+
+
 }
