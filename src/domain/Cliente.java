@@ -14,11 +14,13 @@ public class Cliente {
     private String Nombre;
     private String Apellido;
     private String DNI;
+    private Cuenta[] cu;
 
-    public Cliente(String nombre, String apellido, String DNI) {
+    public Cliente(String nombre, String apellido, String DNI, Cuenta[] cu) {
         Nombre = nombre;
         Apellido = apellido;
         this.DNI = DNI;
+        this.cu = cu;
     }
 
     public String getNombre() {
@@ -43,5 +45,13 @@ public class Cliente {
 
     public void setDNI(String DNI) {
         this.DNI = DNI;
+    }
+
+    public Cuenta[] getCu() {
+        return cu;
+    }
+
+    public void setCu(Cuenta[] cu) {
+        this.cu = cu;
     }
 }

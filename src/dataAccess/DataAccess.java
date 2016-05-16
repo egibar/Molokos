@@ -121,11 +121,11 @@ public class DataAccess  {
 	}
 	
 	
-	public Vector<Cuenta> getAllCuentas(String DNI) {
+	public Vector<Cuenta> getAllCuentas() {
 
 
 		 try {
-			 Cuenta proto = new Cuenta(DNI);
+			 Cuenta proto = new Cuenta();
 			 ObjectSet<Cuenta> result = db.queryByExample(proto);
 			 Vector<Cuenta> cuenta=new Vector<Cuenta>();
 			 while(result.hasNext()) 
@@ -190,7 +190,36 @@ public class DataAccess  {
 		}
 
 	}
+	
+	public Vector<Divisas> GetDivisa(String divisa, Sucursal su) {
+		try {
+			Divisas proto = new Divisas(null,null,divisa,su);
+			ObjectSet<Object> result = db.queryByExample(proto);
+			/*
+			 * proto = new Owner(null, null, null, false, null); result.addAll(db.queryByExample(proto));
+			 */
+			Vector<Cuenta> cuenta = new Vector<Cuenta>();
+			while (result.hasNext())
+				cuenta.add((Cuenta) result.next());
+			return cuenta;
+		} finally {
+			// db.close();
+		}
 
-
+	}
+	
+	public void ActualizarSucursal(Divisas d){
+		db.store(d);
+		db.commit();
+	}
+	public void ActualizarCuenta(Cuenta c){
+		db.store(c);
+		db.commit();
+	}
+	public void CrearOp(Date fecha, String operacion, Divisas moneda, int cant,Cuenta c, Sucursal su){
+		Operacion op = new Operacion(fecha,operacion,moneda,cant,c,su);
+		db.store(op);
+		db.commit();
+	}
 
 }

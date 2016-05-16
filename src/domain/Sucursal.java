@@ -20,12 +20,19 @@ public class Sucursal implements Serializable {
     private double Comision; //COMPROBAR SI LA COMISION IRIA AQUI
     private String Direccion;
     private String Nombre;
+    private Divisas[] d;
+    private Cuenta[] c;
 
-    public Sucursal( double Comision, String Direccion, String Nombre) {
-        this.Comision=Comision;
-        this.Direccion=Direccion;
-        this.Nombre=Nombre;
+    public Sucursal(double comision, String direccion, String nombre, Divisas[] d, Cuenta[] c) {
+        Comision = comision;
+        Direccion = direccion;
+        Nombre = nombre;
+        this.d = d;
+        this.c = c;
+    }
 
+    public double getComision() {
+        return Comision;
     }
 
     public void setComision(double comision) {
@@ -48,14 +55,19 @@ public class Sucursal implements Serializable {
         Nombre = nombre;
     }
 
-    public double getComision() {
-        return Comision;
+    public Divisas[] getD() {
+        return d;
     }
 
-
-    public String toString() {
-        return this.Nombre + ": " + this.Direccion;
+    public void setD(Divisas[] d) {
+        this.d = d;
     }
 
+    public Cuenta[] getC() {
+        return c;
+    }
 
+    public void setC(Cuenta[] c) {
+        this.c = c;
+    }
 }

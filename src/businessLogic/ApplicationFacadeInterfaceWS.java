@@ -27,7 +27,7 @@ public interface ApplicationFacadeInterfaceWS  {
 	 */
 
 
-	@WebMethod Offer createOffer(RuralHouse ruralHouse, Date firstDay, Date lastDay,
+/*	@WebMethod Offer createOffer(RuralHouse ruralHouse, Date firstDay, Date lastDay,
 			float price) throws  OverlappingOfferExists, BadDates;
 	/**
 	 * This method creates a book with a corresponding parameters
@@ -44,7 +44,7 @@ public interface ApplicationFacadeInterfaceWS  {
 	 * 
 	 * @return a Set of rural houses
 	 */
-	@WebMethod public Vector<RuralHouse> getAllRuralHouses();
+	/*@WebMethod public Vector<RuralHouse> getAllRuralHouses();
 	
 	/**
 	 * This method obtains the  offers of a ruralHouse in the provided dates 
@@ -55,7 +55,7 @@ public interface ApplicationFacadeInterfaceWS  {
 	 * @return the first offer that overlaps with those dates, or null if there is no overlapping offer
 	 */
 
-	@WebMethod public Vector<Offer> getOffers( RuralHouse rh, Date firstDay,  Date lastDay) ;
+//	@WebMethod public Vector<Offer> getOffers( RuralHouse rh, Date firstDay,  Date lastDay) ;
 	
 	@WebMethod public void initializeBD();
 

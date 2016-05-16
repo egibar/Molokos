@@ -130,12 +130,12 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 		dB4oManager.close();
 
 	}
-	public Sucursal GetSucursal(String nombre, Divisas divisa){
+	public Sucursal GetSucursal(String direccion, Divisas divisa){
 			System.out.println("Start: GetSucursal");
 
 			DataAccess dB4oManager=new DataAccess();
 
-			Sucursal s=dB4oManager.GetSucursal(nombre);
+			Sucursal s=dB4oManager.GetSucursal(direccion);
 			dB4oManager.close();
 			System.out.println("End: GetSucursal");
 
@@ -143,6 +143,30 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 
 		}
 	public Cuenta GetCuenta(Cuenta bankAccount){
+		System.out.println("Start: GetCuenta");
+
+		DataAccess dB4oManager=new DataAccess();
+
+		Cuenta c=dB4oManager.GetCuenta(numero);
+		dB4oManager.close();
+		System.out.println("End: GetCuenta");
+
+		return c;
+
+	}
+	public Divisa GetDivisa(String divisa, Sucursal su){
+		System.out.println("Start: GetCuenta");
+
+		DataAccess dB4oManager=new DataAccess();
+
+		Divisa c=dB4oManager.GetDivisa(divisa,su);
+		dB4oManager.close();
+		System.out.println("End: GetCuenta");
+
+		return c;
+
+	}
+	public o CreateOperacion(){
 		System.out.println("Start: GetCuenta");
 
 		DataAccess dB4oManager=new DataAccess();

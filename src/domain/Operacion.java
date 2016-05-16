@@ -17,14 +17,17 @@ public class Operacion {
     private String Operacion;
     private Divisas Divisa;
     private int Cantidad;
+    private Cuenta cuenta;
+    private Sucursal sucursal;// CAMBIO
 
-    public Operacion(Date fecha, String operacion, Divisas divisa, int cantidad) {
+    public Operacion(Date fecha, String operacion, Divisas divisa, int cantidad, Cuenta cuenta, Sucursal sucursal) {
         this.fecha = fecha;
         Operacion = operacion;
         Divisa = divisa;
         Cantidad = cantidad;
+        this.cuenta = cuenta;
+        this.sucursal = sucursal;
     }
-
 
     public Date getFecha() {
         return fecha;
@@ -58,13 +61,19 @@ public class Operacion {
         Cantidad = cantidad;
     }
 
-    @Override
-    public String toString() {
-        return "Operacion{" +
-                "fecha=" + fecha +
-                ", Operacion='" + Operacion + '\'' +
-                ", Divisa=" + Divisa +
-                ", Cantidad=" + Cantidad +
-                '}';
+    public Cuenta getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
+    }
+
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
     }
 }

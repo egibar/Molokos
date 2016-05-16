@@ -11,50 +11,61 @@ public class Cuenta {
     /**
      *
      */
-    private String DNI;
     private int Numero; //COMPROBAR SI LA COMISION IRIA AQUI
     private double Saldo;
+    private Transferencia[] t;
+    private Operacion[] op;
+    //private Sucursal su;
+    private Cliente cli;
+    
+	public Cuenta(int numero, double saldo, Transferencia[] t, Operacion[] op, Cliente cli) {
+		super();
+		Numero = numero;
+		Saldo = saldo;
+		this.t = t;
+		this.op = op;
+		this.cli = cli;
+	}
 
-    public Cuenta(String DNI, int numero, double saldo) {
-        this.DNI = DNI;
-        Numero = numero;
-        Saldo = saldo;
-    }
+	public int getNumero() {
+		return Numero;
+	}
 
-    public Cuenta() {
-    }
+	public void setNumero(int numero) {
+		Numero = numero;
+	}
 
-    public String getDNI() {
-        return DNI;
-    }
+	public double getSaldo() {
+		return Saldo;
+	}
 
-    public void setDNI(String DNI) {
-        this.DNI = DNI;
-    }
+	public void setSaldo(double saldo) {
+		Saldo = saldo;
+	}
 
-    public int getNumero() {
-        return Numero;
-    }
+	public Transferencia[] getT() {
+		return t;
+	}
 
-    public void setNumero(int numero) {
-        Numero = numero;
-    }
+	public void setT(Transferencia[] t) {
+		this.t = t;
+	}
 
-    public double getSaldo() {
-        return Saldo;
-    }
+	public Operacion[] getOp() {
+		return op;
+	}
 
-    public void setSaldo(double saldo) {
-        Saldo = saldo;
-    }
+	public void setOp(Operacion[] op) {
+		this.op = op;
+	}
 
-    @Override
-    public String toString() {
-        return "Cuenta{" +
-                "DNI='" + DNI + '\'' +
-                ", Numero=" + Numero +
-                ", Saldo=" + Saldo +
-                '}';
-    }
+	public Cliente getCli() {
+		return cli;
+	}
 
+	public void setCli(Cliente cli) {
+		this.cli = cli;
+	}
+	
+    
 }
