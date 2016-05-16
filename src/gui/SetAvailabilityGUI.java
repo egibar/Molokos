@@ -1,4 +1,4 @@
-package gui;
+/*package gui;
 import java.beans.*;
 import java.text.DateFormat;
 import java.util.*;
@@ -181,7 +181,7 @@ private static final long serialVersionUID = 1L;
       return calendar.getTime();
   }
   
-  private void jButton1_actionPerformed(ActionEvent e)
+/*  private void jButton1_actionPerformed(ActionEvent e)
   {
 	  	RuralHouse ruralHouse=((RuralHouse)jComboBox1.getSelectedItem());
 
@@ -237,4 +237,4 @@ private static final long serialVersionUID = 1L;
     jLabel5.setText("Error: Introduce a number");
   }
  }
-}
+}*/

@@ -130,6 +130,7 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 		dB4oManager.close();
 
 	}
+	/*
 	public Sucursal GetSucursal(String direccion, Divisas divisa){
 			System.out.println("Start: GetSucursal");
 
@@ -142,6 +143,7 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 			return s;
 
 		}
+
 	public Cuenta GetCuenta(Cuenta bankAccount){
 		System.out.println("Start: GetCuenta");
 
@@ -178,6 +180,99 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 		return c;
 
 	}
+*/
+	public void comprarDivisa(int N, String D, float cant) {
+		DataAccess dB4oManager = new DataAccess();
+		Divisas div = dB4oManager.conseguirDivisa(D, null);
+		if (div != null) {// falta sucursal----importante puede ser variable
+			// global
+			float auxD = div.getCantidad();
 
-}
+			if (auxD >= cant) {
+				float cambio = div.getValor();
+				String s = div.getSucursal();
+				Sucursal su = dB4oManager.conseguirSucursal(s);
+
+				float comision = su.getComision();
+
+				float newCant = (cant * comision + cant) * cambio;
+
+				Cuenta c = dB4oManager.conseguirCuenta(N);
+				if (c != null) {
+					float aux = c.getSaldo();
+
+					if (aux >= newCant) {
+						float saldo = aux - newCant;
+						float newDivisas = auxD - cant;
+
+						c.setSaldo(saldo);
+						dB4oManager.ActualizarCuenta(c);
+
+						div.setCantidad(newDivisas);
+						dB4oManager.ActualizarSucursal(div);
+
+						Date fecha = new Date();
+						Operacion op =dB4oManager.crearOp(fecha, "Compra", div.getMoneda(), cant, c, su);
+
+
+						c.addOperacion(op);
+						dB4oManager.ActualizarCuenta(c);
+					}
+				} else {
+					System.out.print("error no cuenta");
+				}
+			} else {
+				System.out.print("error no divisa con esas caracteristicas");
+			}
+		}
+	}
+
+
+	public void hacerTransferencia(int c1, int cuentadestino, float cant) {
+		DataAccess dB4oManager = new DataAccess();
+
+				Cuenta c = dB4oManager.conseguirCuenta(cuentadestino);
+				Cuenta cuentaorigen = dB4oManager.conseguirCuenta(c1);
+				if (c != null) {
+					float aux = cuentaorigen.getSaldo();
+					float aux2 = c.getSaldo();
+
+					if (aux >= cant) {
+
+						float saldo = aux - cant;
+						c.setSaldo(aux+cant);
+						cuentaorigen.setSaldo(saldo);
+						dB4oManager.ActualizarCuenta(c);
+						dB4oManager.ActualizarCuenta(cuentaorigen);
+
+
+
+						Date fecha = new Date();
+						Transferencia trans =dB4oManager.crearTrans(fecha,cuentaorigen,c,cant);
+
+
+						c.addTransferencia(trans);
+						cuentaorigen.addTransferencia(trans);
+						dB4oManager.ActualizarCuenta(c);
+						dB4oManager.ActualizarCuenta(cuentaorigen);
+					}
+				} else {
+					System.out.print("error no cuenta");
+				}
+			}
+
+	public Vector<Cuenta> GetCuentas(String DNI) {
+		System.out.println("Start: GetCuenta");
+
+		DataAccess dB4oManager = new DataAccess();
+		Vector<Cuenta>  cuentas=new Vector<Cuenta>();
+		cuentas = dB4oManager.GetCuenta(DNI);
+		dB4oManager.close();
+		System.out.println("End: GetCuenta");
+
+		return cuentas;
+	}
+
+
+	}
 

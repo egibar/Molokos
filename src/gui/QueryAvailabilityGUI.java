@@ -1,4 +1,4 @@
-package gui;
+/*package gui;
 
 import businessLogic.ApplicationFacadeInterfaceWS;
 
@@ -265,4 +265,4 @@ private static final long serialVersionUID = 1L;
 
     	   labelNoOffers.setText(e1.getMessage());
 	}}	
-}
+}*/

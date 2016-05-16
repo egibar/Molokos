@@ -13,34 +13,18 @@ public class Transferencia {
     /**
      *
      */
-    private Cuenta CuentaDestino;
-    private Cuenta CuentaOrigen;
     private Date fecha;
+    private Cuenta CuentaOrigen;
+    private Cuenta CuentaDestino;
     private float Importe;
-    private Sucursal sucursal;// CAMBIO
+  //  private Sucursal sucursal;// CAMBIO
 
-    public Transferencia(Cuenta cuentaDestino, Cuenta cuentaOrigen, Date fecha, float importe, Sucursal sucursal) {
-        CuentaDestino = cuentaDestino;
-        CuentaOrigen = cuentaOrigen;
+    public Transferencia(Date fecha, Cuenta cuentaOrigen, Cuenta cuentaDestino, float importe/*, Sucursal sucursal*/) {
         this.fecha = fecha;
-        Importe = importe;
-        this.sucursal = sucursal;
-    }
-
-    public Cuenta getCuentaDestino() {
-        return CuentaDestino;
-    }
-
-    public void setCuentaDestino(Cuenta cuentaDestino) {
-        CuentaDestino = cuentaDestino;
-    }
-
-    public Cuenta getCuentaOrigen() {
-        return CuentaOrigen;
-    }
-
-    public void setCuentaOrigen(Cuenta cuentaOrigen) {
         CuentaOrigen = cuentaOrigen;
+        CuentaDestino = cuentaDestino;
+        Importe = importe;
+        //this.sucursal = sucursal;
     }
 
     public Date getFecha() {
@@ -51,6 +35,22 @@ public class Transferencia {
         this.fecha = fecha;
     }
 
+    public Cuenta getCuentaOrigen() {
+        return CuentaOrigen;
+    }
+
+    public void setCuentaOrigen(Cuenta cuentaOrigen) {
+        CuentaOrigen = cuentaOrigen;
+    }
+
+    public Cuenta getCuentaDestino() {
+        return CuentaDestino;
+    }
+
+    public void setCuentaDestino(Cuenta cuentaDestino) {
+        CuentaDestino = cuentaDestino;
+    }
+
     public float getImporte() {
         return Importe;
     }
@@ -59,11 +59,13 @@ public class Transferencia {
         Importe = importe;
     }
 
-    public Sucursal getSucursal() {
+   /*
+   public Sucursal getSucursal() {
         return sucursal;
     }
 
     public void setSucursal(Sucursal sucursal) {
         this.sucursal = sucursal;
     }
+    */
 }

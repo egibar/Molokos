@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Vector;
+
 /**
  * Created by asien on 12/05/2016.
  */
@@ -11,20 +13,21 @@ public class Cuenta {
     /**
      *
      */
-    private int Numero; //COMPROBAR SI LA COMISION IRIA AQUI
-    private double Saldo;
-    private Transferencia[] t;
-    private Operacion[] op;
+    private int Numero;
+    private float Saldo;
+	private String Cliente;
+    private Vector<Transferencia> Transferencia;
+    private Vector<Operacion> Operacion;
     //private Sucursal su;
-    private Cliente cli;
-    
-	public Cuenta(int numero, double saldo, Transferencia[] t, Operacion[] op, Cliente cli) {
-		super();
+    //private Cliente cli;
+
+
+	public Cuenta(int numero, float saldo, String cliente, Vector<domain.Transferencia> transferencia, Vector<domain.Operacion> operacion) {
 		Numero = numero;
 		Saldo = saldo;
-		this.t = t;
-		this.op = op;
-		this.cli = cli;
+		Cliente = cliente;
+		Transferencia = transferencia;
+		Operacion = operacion;
 	}
 
 	public int getNumero() {
@@ -35,37 +38,41 @@ public class Cuenta {
 		Numero = numero;
 	}
 
-	public double getSaldo() {
+	public float getSaldo() {
 		return Saldo;
 	}
 
-	public void setSaldo(double saldo) {
+	public void setSaldo(float saldo) {
 		Saldo = saldo;
 	}
 
-	public Transferencia[] getT() {
-		return t;
+	public String getCliente() {
+		return Cliente;
 	}
 
-	public void setT(Transferencia[] t) {
-		this.t = t;
+	public void setCliente(String cliente) {
+		Cliente = cliente;
 	}
 
-	public Operacion[] getOp() {
-		return op;
+	public Vector<domain.Transferencia> getTransferencia() {
+		return Transferencia;
 	}
 
-	public void setOp(Operacion[] op) {
-		this.op = op;
+	public void setTransferencia(Vector<domain.Transferencia> transferencia) {
+		Transferencia = transferencia;
 	}
 
-	public Cliente getCli() {
-		return cli;
+	public Vector<domain.Operacion> getOperacion() {
+		return Operacion;
 	}
 
-	public void setCli(Cliente cli) {
-		this.cli = cli;
+	public void setOperacion(Vector<domain.Operacion> operacion) {
+		Operacion = operacion;
 	}
-	
-    
+	public void addOperacion(Operacion operacion){
+		this.Operacion.addElement(operacion);
+	}
+	public void addTransferencia(Transferencia transferencia){
+		this.Transferencia.addElement(transferencia);
+	}
 }

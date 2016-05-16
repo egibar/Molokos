@@ -6,6 +6,7 @@ package domain;
 
 import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
+import java.util.Vector;
 
 
 public class Sucursal implements Serializable {
@@ -17,25 +18,25 @@ public class Sucursal implements Serializable {
     /**
      *
      */
-    private double Comision; //COMPROBAR SI LA COMISION IRIA AQUI
+    private float Comision; //COMPROBAR SI LA COMISION IRIA AQUI
     private String Direccion;
-    private String Nombre;
     private Divisas[] d;
     private Cuenta[] c;
+    //private Vector<Operacion> operacion;
+    //private Vector<Transferencia> transferencias;
 
-    public Sucursal(double comision, String direccion, String nombre, Divisas[] d, Cuenta[] c) {
+    public Sucursal(float comision, String direccion, Divisas[] d, Cuenta[] c) {
         Comision = comision;
         Direccion = direccion;
-        Nombre = nombre;
         this.d = d;
         this.c = c;
     }
 
-    public double getComision() {
+    public float getComision() {
         return Comision;
     }
 
-    public void setComision(double comision) {
+    public void setComision(float comision) {
         Comision = comision;
     }
 
@@ -45,14 +46,6 @@ public class Sucursal implements Serializable {
 
     public void setDireccion(String direccion) {
         Direccion = direccion;
-    }
-
-    public String getNombre() {
-        return Nombre;
-    }
-
-    public void setNombre(String nombre) {
-        Nombre = nombre;
     }
 
     public Divisas[] getD() {

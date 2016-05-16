@@ -1,10 +1,10 @@
-package gui;
+//package gui;
 
 /**
  * @author Software Engineering teachers
  */
 
-
+/*
 import javax.swing.*;
 
 import configuration.ConfigXML;
@@ -43,7 +43,7 @@ public class MainGUI extends JFrame {
 	/**
 	 * This is the default constructor
 	 */
-	public MainGUI() {
+	/*public MainGUI() {
 		super();
 
 		addWindowListener(new WindowAdapter() {
@@ -70,7 +70,7 @@ public class MainGUI extends JFrame {
 	 * 
 	 * @return void
 	 */
-	private void initialize() {
+	/*private void initialize() {
 		// this.setSize(271, 295);
 		this.setSize(495, 290);
 		this.setContentPane(getJContentPane());
@@ -82,7 +82,7 @@ public class MainGUI extends JFrame {
 	 * 
 	 * @return javax.swing.JPanel
 	 */
-	private JPanel getJContentPane() {
+	/*private JPanel getJContentPane() {
 		if (jContentPane == null) {
 			GridLayout gridLayout = new GridLayout();
 			gridLayout.setRows(4);
@@ -104,7 +104,7 @@ public class MainGUI extends JFrame {
 	 * 
 	 * @return javax.swing.JButton
 	 */
-	private JButton getBoton2() {
+	/*private JButton getBoton2() {
 		if (boton2 == null) {
 			boton2 = new JButton();
 			boton2.setText("Set availability");
@@ -125,7 +125,7 @@ public class MainGUI extends JFrame {
 	 * This method initializes boton3
 	 * 
 	 * @return javax.swing.JButton
-	 */
+	 *//*
 	private JButton getBoton3() {
 		if (boton3 == null) {
 			boton3 = new JButton();
@@ -156,3 +156,4 @@ public class MainGUI extends JFrame {
 
 } // @jve:decl-index=0:visual-constraint="0,0"
 
+*/

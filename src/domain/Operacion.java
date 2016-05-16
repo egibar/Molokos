@@ -15,12 +15,12 @@ public class Operacion {
      */
     private Date fecha;
     private String Operacion;
-    private Divisas Divisa;
-    private int Cantidad;
+    private String Divisa;
+    private float Cantidad;
     private Cuenta cuenta;
     private Sucursal sucursal;// CAMBIO
 
-    public Operacion(Date fecha, String operacion, Divisas divisa, int cantidad, Cuenta cuenta, Sucursal sucursal) {
+    public Operacion(Date fecha, String operacion, String divisa, float cantidad, Cuenta cuenta, Sucursal sucursal) {
         this.fecha = fecha;
         Operacion = operacion;
         Divisa = divisa;
@@ -45,19 +45,19 @@ public class Operacion {
         Operacion = operacion;
     }
 
-    public Divisas getDivisa() {
+    public String getDivisa() {
         return Divisa;
     }
 
-    public void setDivisa(Divisas divisa) {
+    public void setDivisa(String divisa) {
         Divisa = divisa;
     }
 
-    public int getCantidad() {
+    public float getCantidad() {
         return Cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(float cantidad) {
         Cantidad = cantidad;
     }
 

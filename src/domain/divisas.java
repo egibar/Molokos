@@ -11,21 +11,23 @@ public class Divisas {
     /**
      *
      */
-    private int Cantidad; //COMPROBAR SI LA COMISION IRIA AQUI
+    private float Cantidad; //COMPROBAR SI LA COMISION IRIA AQUI
     private float Valor;
-    private String Nombre;
+    private String Moneda;
+    private String sucursal;
 
-    public Divisas(int cantidad, float valor, String nombre) {
+    public Divisas(float cantidad, float valor, String moneda, String sucursal) {
         Cantidad = cantidad;
         Valor = valor;
-        Nombre = nombre;
+        Moneda = moneda;
+        this.sucursal = sucursal;
     }
 
-    public int getCantidad() {
+    public float getCantidad() {
         return Cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(float cantidad) {
         Cantidad = cantidad;
     }
 
@@ -37,20 +39,19 @@ public class Divisas {
         Valor = valor;
     }
 
-    public String getNombre() {
-        return Nombre;
+    public String getMoneda() {
+        return Moneda;
     }
 
-    public void setNombre(String nombre) {
-        Nombre = nombre;
+    public void setMoneda(String moneda) {
+        Moneda = moneda;
     }
 
-    @Override
-    public String toString() {
-        return "Divisas{" +
-                "Cantidad=" + Cantidad +
-                ", Valor=" + Valor +
-                ", Nombre='" + Nombre + '\'' +
-                '}';
+    public String getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(String sucursal) {
+        this.sucursal = sucursal;
     }
 }

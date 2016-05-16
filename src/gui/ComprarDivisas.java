@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
 import businessLogic.ApplicationFacadeInterfaceWS;
+import businessLogic.FacadeImplementationWS;
 import domain.Cuenta;
 import domain.Operacion;
 import domain.Sucursal;
@@ -26,8 +27,8 @@ public class ComprarDivisas extends JFrame {
 	private JButton btnComprar;
 
 	private String divisa;
-	private Double cantidad;
-	private String bankAccount;
+	private float cantidad;
+	private int bankAccount;
 	protected Component frame;
 
 	/**
@@ -61,7 +62,6 @@ public class ComprarDivisas extends JFrame {
 		this.setSize(671, 649);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
-		getContentPane().setLayout(null);
 
 		setLabels();
 		setFields();
@@ -118,23 +118,36 @@ public class ComprarDivisas extends JFrame {
 		setVisible(true);
 
 	}
+
+
+
+
 	private JButton getJButton() {
 		btnComprar = new JButton("Comprar");
 		btnComprar.setBounds(164, 246, 158, 47);
 		contentPane.add(btnComprar);
 		btnComprar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (textCuenta.isEditValid()) {
+				//if (textCuenta.isEditValid()) {
 					try {
 
-						ApplicationFacadeInterfaceWS facade = StartWindow.getBusinessLogic();
+						FacadeImplementationWS facade = new FacadeImplementationWS();
 
 						divisa = textDivisa.getText();
-						cantidad = Double.parseDouble(textCantidad.getText());
-						bankAccount = textCuenta.getText();
+						cantidad = Float.parseFloat(textCantidad.getText());
+						bankAccount = Integer.parseInt(textCuenta.getText());
 						java.util.Date fecha = new Date();
-						if (!checkEmptyFields()) {
-							if (showConfirmDialog()) {
+						facade.comprarDivisa(bankAccount, divisa, cantidad);
+						//facade.comprarDivisa(123, "Libra", 1);
+						dispose();
+
+
+
+					//	ApplicationFacadeInterfaceWS facade = StartWindow.getBusinessLogic();
+
+						/*
+						if (!checkEmptyFields()) {if (showConfirmDialog()) {
+
 
 									Sucursal s = facade.GetSucursal(nombreSucursal,divisa);
 									Cuenta c = facade.GetCuenta(bankAccount);
@@ -159,13 +172,14 @@ public class ComprarDivisas extends JFrame {
 						showErrorCantidad();
 					} catch (NoBalanceEnough nbe) {
 						showErrorSaldo();
+						*/
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
 
-				}else{
-					JOptionPane.showMessageDialog(null, "Please insert the 20 digits of the bankaccount");				}
-			}
+				}/*else{
+					JOptionPane.showMessageDialog(null, "Please insert the 20 digits of the bankaccount");				}*/
+
 
 		});
 		return btnComprar;
@@ -240,8 +254,8 @@ public class ComprarDivisas extends JFrame {
 
 	private boolean checkEmptyFields() {
 		String message = "Please fill in all the fields";
-		if (bankAccount.trim().equals("") || divisa.trim().equals("")
-				|| cantidad.trim().equals("")) {
+		if (/*bankAccount.trim().equals("") ||*/ divisa.trim().equals("")
+				/*|| cantidad.trim().equals("")*/) {
 			JOptionPane.showMessageDialog(null, message, "Error",
 					JOptionPane.WARNING_MESSAGE);
 			return true;

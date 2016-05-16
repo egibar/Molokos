@@ -1,4 +1,4 @@
-package gui;
+/*package gui;
 
 import java.awt.Color;
 import java.net.URL;
@@ -61,7 +61,7 @@ public class ApplicationLauncher {
 			/*if (c.getDataBaseOpenMode().equals("initialize")) 
 				appFacadeInterface.initializeBD();
 				*/
-			MainGUI.setBussinessLogic(appFacadeInterface);
+/*			MainGUI.setBussinessLogic(appFacadeInterface);
 
 		
 
@@ -77,3 +77,4 @@ public class ApplicationLauncher {
 	}
 
 }
+*/
