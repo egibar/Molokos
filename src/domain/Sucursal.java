@@ -22,7 +22,7 @@ public class Sucursal implements Serializable {
     private String Direccion;
     private Divisas[] d;
     private Cuenta[] c;
-    //private Vector<Operacion> operacion;
+   // private Vector<Operacion> operacion;
     //private Vector<Transferencia> transferencias;
 
     public Sucursal(float comision, String direccion, Divisas[] d, Cuenta[] c) {
@@ -63,4 +63,13 @@ public class Sucursal implements Serializable {
     public void setC(Cuenta[] c) {
         this.c = c;
     }
+
+   /* public Vector<Operacion> getOperacion() {
+        return operacion;
+    }
+
+    public void setOperacion(Vector<Operacion> operacion) {
+        this.operacion = operacion;
+    }
+    */
 }

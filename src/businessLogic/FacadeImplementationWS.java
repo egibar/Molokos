@@ -1,14 +1,12 @@
 package businessLogic;
 
 import java.io.File;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.Vector;
+import java.util.*;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import com.db4o.ObjectSet;
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
 
@@ -55,8 +53,8 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 	/**
 	 * This method creates an offer with a house number, first day, last day and price
 	 * 
-	 * @param House
-	 *            number, start day, last day and price
+	 * @param
+	 *            , start day, last day and price
 	 * @return the created offer, or null, or an exception
 	 */
 	/*public Offer createOffer(RuralHouse ruralHouse, Date firstDay, Date lastDay,
@@ -212,7 +210,7 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 						dB4oManager.ActualizarSucursal(div);
 
 						Date fecha = new Date();
-						Operacion op =dB4oManager.crearOp(fecha, "Compra", div.getMoneda(), cant, c, su);
+						Operacion op =dB4oManager.crearOp(fecha, "Compra", div.getMoneda(), cant, c.getNumero(), su.getDireccion());
 
 
 						c.addOperacion(op);
@@ -248,10 +246,16 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 
 
 						Date fecha = new Date();
-						Transferencia trans =dB4oManager.crearTrans(fecha,cuentaorigen,c,cant);
+						Transferencia trans =dB4oManager.crearTrans(fecha,cuentaorigen.getNumero(),c.getNumero(),cant);
+
+
+
+
+
 
 
 						c.addTransferencia(trans);
+						cuentaorigen.addTransferencia(trans);
 						cuentaorigen.addTransferencia(trans);
 						dB4oManager.ActualizarCuenta(c);
 						dB4oManager.ActualizarCuenta(cuentaorigen);
@@ -272,6 +276,59 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 
 		return cuentas;
 	}
+	//public void ObtenerListado (Date fecha){}
+	public Vector<Transferencia> GetTransferencias(Date fecha){
+		DataAccess dB4oManager = new DataAccess();
+		Vector<Transferencia>transferencias = new Vector<Transferencia>();
+		transferencias= dB4oManager.GetTransferencias(fecha);
+		dB4oManager.close();
+
+		return transferencias;
+	}
+
+	public Vector<Vector<String>> GetOperaciones(String su){
+
+		/*DataAccess dB4oManager = new DataAccess();
+		Sucursal s= dB4oManager.conseguirSucursal(su);
+		Cuenta[] cuentas = s.getC();
+		Vector[]*/
+		//Vector<Operacion> operaciones= new Vector<Operacion>();
+
+		DataAccess dataManager = new DataAccess();
+		Sucursal s= dataManager.conseguirSucursal(su);
+		List<Cuenta> lista = dataManager.GetCuenta(s);
+
+
+				Vector<Vector<String>> result = new Vector();
+
+				for(Cuenta op : lista){
+
+					Vector<String> v = new Vector<>();
+
+					v.add(op.getOperacion().toString());
+					/*v.add((Float.parseFloat(op.getCantidad());
+					v.add(res.getOferta().getLastDay().toString());
+					v.add(Float.toString(res.getOferta().getPrice()));
+					v.add(res.getUsuario().getNombre() + " " + res.getUsuario().getApellido());*/
+
+					result.add(v);
+				}
+
+				dataManager.close();
+				return result;
+			}
+
+
+
+
+
+		/*}
+		Vector<Operacion>  operaciones=new Vector<Operacion>();
+		operaciones = dB4oManager.GetOperaciones(fecha);
+		dB4oManager.close();
+		System.out.println("End: GetCuenta");*/
+
+
 
 
 	}

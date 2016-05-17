@@ -1,27 +1,19 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import businessLogic.ApplicationFacadeInterfaceWS;
 
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JMenu;
-import javax.swing.JTabbedPane;
-import javax.swing.JButton;
-import javax.swing.UIManager;
-import java.awt.Color;
-import java.awt.Container;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
-import javax.swing.JSeparator;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class StartWindow extends JFrame {
 
@@ -39,6 +31,7 @@ public class StartWindow extends JFrame {
 	private static JSeparator separator;
 	private static JSeparator separator_1;
 	private static JSeparator separator_2;
+	public static ResourceBundle strings;
 
 
 
@@ -69,31 +62,36 @@ public class StartWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public StartWindow() {
-		
+
+		setJMenuBar(menuBar);
+		setJMenuBar(getMenuBar_1());
 		setTitle("MOLOKOS");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 722, 512);
-		
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-		
-		setJMenuBar(getMenuBar_1());
-		JSeparator separator = new JSeparator();
-		mnComprar.add(separator);
+		setBounds(100, 100, 768, 730);
+
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(Colors.FOREGROUNDCOLOR);
+		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(12, 0, 710, 463);
+		tabbedPane.setBackground(Colors.FOREGROUNDCOLOR);
+		tabbedPane.setBounds(6, 6, 756, 696);
 		contentPane.add(tabbedPane);
-		
+
 		JPanel panelMain = new JPanel();
-		tabbedPane.addTab("New tab", null, panelMain, null);
+		panelMain.setBackground(Colors.FOREGROUNDCOLOR);
+		tabbedPane.addTab("Main", null, panelMain, null);
 		panelMain.setLayout(null);
-		
+//------------------------------------------------------------//
+
+		JMenuBar menuBar = new JMenuBar();
+
+		JSeparator separator = new JSeparator();
+		mnComprar.add(separator);
+//------------------------------------------------------------//
 		JButton btnComprarDivisas = new JButton("Comprar Divisas");
 		btnComprarDivisas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -101,24 +99,43 @@ public class StartWindow extends JFrame {
 				a.setVisible(true);
 			}
 		});
-		btnComprarDivisas.setForeground(Color.BLACK);
-		btnComprarDivisas.setBackground(UIManager.getColor("Button.background"));
+		btnComprarDivisas.setForeground(Colors.FONTCOLOR);
+		btnComprarDivisas.setBackground(Colors.FOREGROUNDCOLOR);
+		//btnComprarDivisas.setBackground(UIManager.getColor("Button.background"));
 		btnComprarDivisas.setBounds(57, 85, 228, 53);
 		panelMain.add(btnComprarDivisas);
 		
 		JButton btnVenderDivisas = new JButton("Vender Divisas");
 		btnVenderDivisas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				mntmVenderDivisas.doClick();
 			}
 		});
-		btnVenderDivisas.setForeground(Color.BLACK);
-		btnVenderDivisas.setBackground(UIManager.getColor("Button.background"));
+		btnVenderDivisas.setForeground(Colors.FONTCOLOR);
+		btnVenderDivisas.setBackground(Colors.FOREGROUNDCOLOR);
+		//btnVenderDivisas.setBackground(UIManager.getColor("Button.background"));
 		btnVenderDivisas.setBounds(390, 85, 228, 53);
 		panelMain.add(btnVenderDivisas);
+
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setBounds(316, 95, 263, 79);
+		lblLogo.setVisible(false);
+		ImageIcon x = new ImageIcon("logo.jpg");
+		ImageIcon t = new ImageIcon(x.getImage().getScaledInstance(
+				lblLogo.getWidth(), lblLogo.getHeight(),
+				Image.SCALE_DEFAULT));
+		lblLogo.setIcon(t);
+		panelMain.add(lblLogo);
+
+
+
+
+
 		
 		JButton btnHacerTransferencia = new JButton("Hacer Transferencia");
-		btnHacerTransferencia.setForeground(Color.BLACK);
-		btnHacerTransferencia.setBackground(UIManager.getColor("Button.background"));
+		btnHacerTransferencia.setForeground(Colors.FONTCOLOR);
+		btnHacerTransferencia.setBackground(Colors.FOREGROUNDCOLOR);
+		//btnHacerTransferencia.setBackground(UIManager.getColor("Button.background"));
 		btnHacerTransferencia.setBounds(57, 212, 228, 53);
 		panelMain.add(btnHacerTransferencia);
 		btnHacerTransferencia.addActionListener(new ActionListener() {
@@ -127,6 +144,18 @@ public class StartWindow extends JFrame {
 		a.setVisible(true);
 	}
 });
+		JButton btnListado = new JButton("Obtener Listado");
+		btnListado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame a = new ObtenerListado();
+				a.setVisible(true);
+			}
+		});
+		btnListado.setForeground(Colors.FONTCOLOR);
+		btnListado.setBackground(Colors.FOREGROUNDCOLOR);
+//		btnListado.setBackground(UIManager.getColor("Button.background"));
+		btnListado.setBounds(390,  212, 228, 53);
+		panelMain.add(btnListado);
 	}
 
 	private JMenuBar getMenuBar_1() {
@@ -259,5 +288,49 @@ public class StartWindow extends JFrame {
 		}
 		return separator;
 	}
+
+	public ResourceBundle getStrings() {
+		return strings;
+	}
+
+	/*private JPanel setContainerPanel(){
+		JPanel mainPane = new JPanel();
+		mainPane.setLayout(new BoxLayout(mainPane, BoxLayout.PAGE_AXIS));
+		mainPane.add(setLanguagesPane());
+		mainPane.add(setContentPane());
+		return mainPane;
+	}
+	private JPanel setLanguagesPane(){
+		JPanel lanPane = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		String[] listaIdiomas = {"ingles", "castellano", "chino", "frances", "turco", "swahili", "euskera"};
+
+		JComboBox combo = new JComboBox(listaIdiomas);;
+		lanPane.add(combo);
+		lanPane.setBackground(new Color(240, 240, 240));
+
+		combo.addActionListener(e->{
+			System.out.println(combo.getSelectedItem());
+			strings = ResourceBundle.getBundle("languages/Idioma", idiomas.get((String) combo.getSelectedItem()));
+			bus.reloadFields();
+			edit.reloadFields();
+			newRh.reloadFields();
+			reserva.reloadFields();
+			addOferta.reloadFields();
+			reloadMain();
+		});
+
+		return lanPane;
+	}
+	private void languageSettings(){
+
+		idiomas = new HashMap<>();
+
+		idiomas.put("ingles", new Locale("en", "US"));
+		idiomas.put("castellano", new Locale("es", "ES"));
+		idiomas.put("euskera", new Locale("eu", "EU"));
+
+		strings = ResourceBundle.getBundle("languages/Idioma", Locale.getDefault());
+	}*/
+
 }
 

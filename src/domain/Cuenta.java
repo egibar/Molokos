@@ -72,7 +72,13 @@ public class Cuenta {
 	public void addOperacion(Operacion operacion){
 		this.Operacion.addElement(operacion);
 	}
-	public void addTransferencia(Transferencia transferencia){
-		this.Transferencia.addElement(transferencia);
+
+	@Override
+	public String toString() {
+		return	"" + Numero;
+	}
+
+	public void addTransferencia(Transferencia transferencia){this.Transferencia.addElement(transferencia);
+
 	}
 }

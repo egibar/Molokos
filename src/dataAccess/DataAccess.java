@@ -1,6 +1,7 @@
 package dataAccess;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ListIterator;
 import java.util.Vector;
@@ -19,6 +20,7 @@ import configuration.ConfigXML;
 //import domain.Booking;
 import domain.*;
 import exceptions.OverlappingOfferExists;
+import gui.ObtenerListado;
 
 public class DataAccess  {
 	protected static ObjectContainer  db;
@@ -71,8 +73,17 @@ public class DataAccess  {
 		Divisas d3=new Divisas(1, 30000000,"Euro","Gros");
 		Divisas[] daux = {d1, d2, d3};
 
-		Cuenta cuenta1= new Cuenta(1,100000000,"72526101V",null,null);
-		Cuenta cuenta2= new Cuenta(123,1000000000,"72526101V",null,null);
+		Date fecha = new Date();
+		Operacion op1 = new Operacion(fecha,"Compra","Libra",1,1,"Gros");
+		Vector<Operacion> v = new Vector<Operacion>();
+		v.addElement(op1);
+
+		Transferencia trans = new Transferencia(fecha,1,123,1);
+		Vector<Transferencia> t = new Vector<Transferencia>();
+		t.addElement(trans);
+
+		Cuenta cuenta1= new Cuenta(1,9000,"72526101V",t,v);
+		Cuenta cuenta2= new Cuenta(123,9000,"72526101V",t,v);
 		Cuenta[] caux = {cuenta1,cuenta2};
 
 		Cliente c1= new Cliente("Asier","Egibar","72526101V",caux);
@@ -210,10 +221,10 @@ public class DataAccess  {
 		db.commit();
 	}
 
-	public Operacion crearOp(Date f, String b, String moneda,float cant, Cuenta c,Sucursal su) {
+	public Operacion crearOp(Date f, String operacion, String moneda,float cant, int c,String su) {
 //		Divisa d = new Divisa(moneda, 0, 0, s);
 //		Divisa divisa = (Divisa) db.queryByExample(d);
-		Operacion op = new Operacion(f, b, moneda, cant, c, su);
+		Operacion op = new Operacion(f, operacion, moneda, cant, c,su );
 
 		db.store(op);
 		db.commit();
@@ -221,7 +232,7 @@ public class DataAccess  {
 		return op;
 	}
 
-	public Transferencia crearTrans(Date f,Cuenta cuentaorigen,Cuenta cuentadestino, float cant/*, Sucursal su*/) {
+	public Transferencia crearTrans(Date f,int cuentaorigen,int cuentadestino, float cant/*, Sucursal su*/) {
 //		Divisa d = new Divisa(moneda, 0, 0, s);
 //		Divisa divisa = (Divisa) db.queryByExample(d);
 		Transferencia trans = new Transferencia(f,cuentaorigen, cuentadestino, cant/*, su*/);
@@ -239,12 +250,57 @@ public class DataAccess  {
 		Vector<Cuenta> cuentas = new Vector<Cuenta>();
 		while (result.hasNext())
 			cuentas.add(result.next());
+
 		return cuentas;
 		}finally {
 
 		}
 
 	}
+
+	public Vector<Cuenta> GetCuenta( Sucursal su) {
+		try{
+			Cuenta cuenta = new Cuenta(0,0,null,null,null);
+			ObjectSet<Cuenta> result= db.queryByExample(cuenta);
+			Vector<Cuenta> cuentas = new Vector<Cuenta>();
+			while (result.hasNext())
+				cuentas.add(result.next());
+
+			return cuentas;
+		}finally {
+
+		}
+
+	}
+
+
+	public Vector<Transferencia> GetTransferencias(Date fecha){
+		try{
+			Transferencia transferencia = new Transferencia(fecha,0,0,0);
+			ObjectSet<Transferencia> result = db.queryByExample(transferencia);
+			Vector<Transferencia> transferencias = new Vector<Transferencia>();
+			while (result.hasNext())
+				transferencias.add(result.next());
+			return transferencias;
+		}
+		finally {
+
+		}
+	}
+	public Vector<Operacion> GetOperaciones(String su){
+		try{
+			Operacion operacion = new Operacion(null,null,null,0,0,null);
+			ObjectSet<Operacion> result = db.queryByExample(operacion);
+			Vector<Operacion> operaciones = new Vector<Operacion>();
+			while (result.hasNext())
+				operaciones.add(result.next());
+			return operaciones;
+		}
+		finally {
+
+		}
+	}
+
 
 
 }

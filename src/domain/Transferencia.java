@@ -14,12 +14,12 @@ public class Transferencia {
      *
      */
     private Date fecha;
-    private Cuenta CuentaOrigen;
-    private Cuenta CuentaDestino;
+    private int CuentaOrigen;
+    private int CuentaDestino;
     private float Importe;
   //  private Sucursal sucursal;// CAMBIO
 
-    public Transferencia(Date fecha, Cuenta cuentaOrigen, Cuenta cuentaDestino, float importe/*, Sucursal sucursal*/) {
+    public Transferencia(Date fecha, int cuentaOrigen, int cuentaDestino, float importe/*, Sucursal sucursal*/) {
         this.fecha = fecha;
         CuentaOrigen = cuentaOrigen;
         CuentaDestino = cuentaDestino;
@@ -35,19 +35,19 @@ public class Transferencia {
         this.fecha = fecha;
     }
 
-    public Cuenta getCuentaOrigen() {
+    public int getCuentaOrigen() {
         return CuentaOrigen;
     }
 
-    public void setCuentaOrigen(Cuenta cuentaOrigen) {
+    public void setCuentaOrigen(int cuentaOrigen) {
         CuentaOrigen = cuentaOrigen;
     }
 
-    public Cuenta getCuentaDestino() {
+    public int getCuentaDestino() {
         return CuentaDestino;
     }
 
-    public void setCuentaDestino(Cuenta cuentaDestino) {
+    public void setCuentaDestino(int cuentaDestino) {
         CuentaDestino = cuentaDestino;
     }
 
@@ -59,7 +59,16 @@ public class Transferencia {
         Importe = importe;
     }
 
-   /*
+    @Override
+    public String toString() {
+        return "Transferencia{" +
+                "fecha=" + fecha +
+                ", CuentaOrigen=" + CuentaOrigen +
+                ", CuentaDestino=" + CuentaDestino +
+                ", Importe=" + Importe +
+                '}';
+    }
+    /*
    public Sucursal getSucursal() {
         return sucursal;
     }

@@ -17,10 +17,10 @@ public class Operacion {
     private String Operacion;
     private String Divisa;
     private float Cantidad;
-    private Cuenta cuenta;
-    private Sucursal sucursal;// CAMBIO
+    private int cuenta;
+    private String sucursal;// CAMBIO
 
-    public Operacion(Date fecha, String operacion, String divisa, float cantidad, Cuenta cuenta, Sucursal sucursal) {
+    public Operacion(Date fecha, String operacion, String divisa, float cantidad, int cuenta, String sucursal) {
         this.fecha = fecha;
         Operacion = operacion;
         Divisa = divisa;
@@ -61,19 +61,31 @@ public class Operacion {
         Cantidad = cantidad;
     }
 
-    public Cuenta getCuenta() {
+    public int getCuenta() {
         return cuenta;
     }
 
-    public void setCuenta(Cuenta cuenta) {
+    public void setCuenta(int cuenta) {
         this.cuenta = cuenta;
     }
 
-    public Sucursal getSucursal() {
+    public String getSucursal() {
         return sucursal;
     }
 
-    public void setSucursal(Sucursal sucursal) {
+    public void setSucursal(String sucursal) {
         this.sucursal = sucursal;
+    }
+
+    @Override
+    public String toString() {
+        return "Operacion{" +
+                "fecha=" + fecha +
+                ", Operacion='" + Operacion + '\'' +
+                ", Divisa='" + Divisa + '\'' +
+                ", Cantidad=" + Cantidad +
+                ", cuenta=" + cuenta +
+                ", sucursal='" + sucursal + '\'' +
+                '}';
     }
 }

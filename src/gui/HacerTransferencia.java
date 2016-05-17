@@ -67,6 +67,7 @@ public class HacerTransferencia extends JFrame {
 				coleccion = facade.GetCuentas(DNI);
 				for (Object v : coleccion)  c.addElement(v);
 
+
 			}
 		});
 
@@ -141,7 +142,7 @@ public class HacerTransferencia extends JFrame {
 	private JComboBox getcuentas() {
 		if (cuentas == null) {
 			cuentas = new JComboBox();
-			cuentas.setBounds(269, 184, 114, 24);
+			cuentas.setBounds(269, 184, 214, 24);
 			contentPane.add(cuentas);
 			cuentas.setModel(c);
 			cuentas.addActionListener(new  ActionListener() {
@@ -176,6 +177,7 @@ public class HacerTransferencia extends JFrame {
 
 		setLabels();
 		setFields();
+		getcuentas();
 		getJButton();
 	}
 
@@ -192,8 +194,9 @@ public class HacerTransferencia extends JFrame {
 					int cuentaOrigen= cuentas.getSelectedIndex();
 					cuentadestino= Integer.parseInt(textFieldDestino.getText());
 					cantidad= Float.parseFloat(textFieldCantidad.getText());
-
+					cuentaOrigen=1;
 					java.util.Date fecha = new Date();
+
 					facade.hacerTransferencia(cuentaOrigen, cuentadestino, cantidad);
 					//facade.comprarDivisa(123, "Libra", 1);
 					dispose();
