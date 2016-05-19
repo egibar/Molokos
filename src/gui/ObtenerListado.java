@@ -22,6 +22,12 @@ public class ObtenerListado extends JFrame {
     private JTextField textFieldDestino;
     private JTextField textFieldCantidad;
     private JComboBox op = null;
+    /*private JList o =null;
+    private JPanel jContentPane=null;
+    private JLabel jLabel = null;
+    private JScrollPane oScrollPane = null;
+    private JLabel searchResult = null;*/
+
     private String DNI;
     private Cuenta cuentaorigen;
     private int cuentadestino;
@@ -38,37 +44,28 @@ public class ObtenerListado extends JFrame {
      * Create the frame.
      */
 
-
-
-    private void setLabels() {
-        JLabel lblHacerTransferencia = new JLabel("Obtener Listado");
-        lblHacerTransferencia.setFont(new Font("Courier 10 Pitch", Font.BOLD, 24));
-        lblHacerTransferencia.setBounds(80, 12, 293, 47);
-        contentPane.add(lblHacerTransferencia);
-
-        JLabel lblDni = new JLabel("Listado de Operaciones y Transferencias");
-        lblDni.setBounds(36, 137, 213, 15);
-        contentPane.add(lblDni);
-
-
-    }
-
-
     public ObtenerListado() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 473, 452);
+		setBounds(100, 100, 473, 452);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
 
-        this.setSize(671, 649);
-        this.setResizable(false);
+		this.setSize(1243, 1205);
+        this.setResizable(true);
         this.setLocationRelativeTo(null);
+        setVisible(true);
 
         setLabels();
         getOp();
+        
+        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+        tabbedPane.setBounds(145, 381, 269, 147);
+        contentPane.add(tabbedPane);
+        /*getO();
+        setContentPane(getJContentPane());*/
 
         this.addWindowListener(new WindowListener() {
             @Override
@@ -129,10 +126,24 @@ public class ObtenerListado extends JFrame {
         });
 
     }
+
+    private void setLabels() {
+        JLabel lblHacerTransferencia = new JLabel("Obtener Listado");
+        lblHacerTransferencia.setFont(new Font("Courier 10 Pitch", Font.BOLD, 24));
+        lblHacerTransferencia.setBounds(158, 12, 293, 47);
+        contentPane.add(lblHacerTransferencia);
+
+        JLabel lblDni = new JLabel("Listado de Operaciones");
+        lblDni.setBounds(36, 137, 415, 47);
+        contentPane.add(lblDni);
+
+
+    }
+
     private JComboBox getOp() {
         if (op == null) {
             op = new JComboBox();
-            op.setBounds(269, 184, 914, 24);
+            op.setBounds(26, 211, 742, 124);
             contentPane.add(op);
             op.setModel(c);
             /*op.addActionListener(new  ActionListener() {
@@ -153,6 +164,4 @@ public class ObtenerListado extends JFrame {
         }
         return op;
     }
-
 }
-

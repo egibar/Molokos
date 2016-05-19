@@ -4,19 +4,17 @@ import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 import businessLogic.ApplicationFacadeInterfaceWS;
-
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
-import java.util.HashMap;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class StartWindow extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private static JMenuBar menuBar;
 	private static JMenu mnComprar;
@@ -29,8 +27,8 @@ public class StartWindow extends JFrame {
 	private static JMenuItem mntmVerTransferenciasCliente;
 	private static JMenuItem mntmObtenerListado;
 	private static JSeparator separator;
-	private static JSeparator separator_1;
-	private static JSeparator separator_2;
+	//private static JSeparator separator_1;
+	//private static JSeparator separator_2;
 	public static ResourceBundle strings;
 
 
@@ -69,6 +67,8 @@ public class StartWindow extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 768, 730);
+		this.setSize(1243, 1205);
+
 
 		contentPane = new JPanel();
 		contentPane.setBackground(Colors.FOREGROUNDCOLOR);
@@ -78,7 +78,7 @@ public class StartWindow extends JFrame {
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBackground(Colors.FOREGROUNDCOLOR);
-		tabbedPane.setBounds(6, 6, 756, 696);
+		tabbedPane.setBounds(6, 6, 1231, 1087);
 		contentPane.add(tabbedPane);
 
 		JPanel panelMain = new JPanel();
@@ -87,12 +87,13 @@ public class StartWindow extends JFrame {
 		panelMain.setLayout(null);
 //------------------------------------------------------------//
 
-		JMenuBar menuBar = new JMenuBar();
+		//JMenuBar menuBar = new JMenuBar();
 
 		JSeparator separator = new JSeparator();
 		mnComprar.add(separator);
 //------------------------------------------------------------//
 		JButton btnComprarDivisas = new JButton("Comprar Divisas");
+		btnComprarDivisas.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 50));
 		btnComprarDivisas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrame a = new ComprarDivisas();
@@ -102,60 +103,59 @@ public class StartWindow extends JFrame {
 		btnComprarDivisas.setForeground(Colors.FONTCOLOR);
 		btnComprarDivisas.setBackground(Colors.FOREGROUNDCOLOR);
 		//btnComprarDivisas.setBackground(UIManager.getColor("Button.background"));
-		btnComprarDivisas.setBounds(57, 85, 228, 53);
+		btnComprarDivisas.setBounds(62, 396, 425, 154);
 		panelMain.add(btnComprarDivisas);
 		
 		JButton btnVenderDivisas = new JButton("Vender Divisas");
+		btnVenderDivisas.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 50));
 		btnVenderDivisas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mntmVenderDivisas.doClick();
+				//mntmVenderDivisas.doClick();
 			}
 		});
 		btnVenderDivisas.setForeground(Colors.FONTCOLOR);
 		btnVenderDivisas.setBackground(Colors.FOREGROUNDCOLOR);
 		//btnVenderDivisas.setBackground(UIManager.getColor("Button.background"));
-		btnVenderDivisas.setBounds(390, 85, 228, 53);
+		btnVenderDivisas.setBounds(601, 396, 491, 154);
 		panelMain.add(btnVenderDivisas);
-
-		JLabel lblLogo = new JLabel("");
-		lblLogo.setBounds(316, 95, 263, 79);
-		lblLogo.setVisible(false);
-		ImageIcon x = new ImageIcon("logo.jpg");
-		ImageIcon t = new ImageIcon(x.getImage().getScaledInstance(
-				lblLogo.getWidth(), lblLogo.getHeight(),
-				Image.SCALE_DEFAULT));
-		lblLogo.setIcon(t);
-		panelMain.add(lblLogo);
-
-
-
-
-
-		
+			
 		JButton btnHacerTransferencia = new JButton("Hacer Transferencia");
+		btnHacerTransferencia.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 50));
+		btnHacerTransferencia.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			JFrame b = new HacerTransferencia();
+			b.setVisible(true);
+			}
+		});
 		btnHacerTransferencia.setForeground(Colors.FONTCOLOR);
 		btnHacerTransferencia.setBackground(Colors.FOREGROUNDCOLOR);
 		//btnHacerTransferencia.setBackground(UIManager.getColor("Button.background"));
-		btnHacerTransferencia.setBounds(57, 212, 228, 53);
+		btnHacerTransferencia.setBounds(62, 721, 425, 154);
 		panelMain.add(btnHacerTransferencia);
-		btnHacerTransferencia.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-		JFrame a = new HacerTransferencia();
-		a.setVisible(true);
-	}
-});
+
 		JButton btnListado = new JButton("Obtener Listado");
+		btnListado.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 50));
 		btnListado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame a = new ObtenerListado();
-				a.setVisible(true);
+				JFrame c = new ObtenerListado();
+				c.setVisible(true);
 			}
 		});
 		btnListado.setForeground(Colors.FONTCOLOR);
 		btnListado.setBackground(Colors.FOREGROUNDCOLOR);
 //		btnListado.setBackground(UIManager.getColor("Button.background"));
-		btnListado.setBounds(390,  212, 228, 53);
+		btnListado.setBounds(594,  721, 498, 154);
 		panelMain.add(btnListado);
+		
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setBounds(400, 28, 285, 288);
+		lblLogo.setVisible(true);
+		ImageIcon x = new ImageIcon("Logo.jpg");
+		ImageIcon t = new ImageIcon(x.getImage().getScaledInstance(
+				lblLogo.getWidth(), lblLogo.getHeight(),
+				Image.SCALE_DEFAULT));
+		lblLogo.setIcon(t);
+		panelMain.add(lblLogo);
 	}
 
 	private JMenuBar getMenuBar_1() {
@@ -274,7 +274,8 @@ public class StartWindow extends JFrame {
 		mntmObtenerListado.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				mntmObtenerListado.doClick();
+				JFrame a = new ObtenerListado();
+				a.setVisible(true);
 			}
 		});
 		return mntmObtenerListado;

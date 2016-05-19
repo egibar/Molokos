@@ -55,14 +55,14 @@ public class ComprarDivisas extends JFrame {
 	 */
 	public ComprarDivisas() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 483, 333);
+		setBounds(100, 100, 473, 452);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 
-		this.setSize(671, 649);
+		this.setSize(1243, 1205);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		setResizable(false);
@@ -143,10 +143,11 @@ public class ComprarDivisas extends JFrame {
 							divisa = textDivisa.getText();
 							cantidad = Float.parseFloat(textCantidad.getText());
 							bankAccount = Integer.parseInt(textCuenta.getText());
-							java.util.Date fecha = new Date();
+							if(showConfirmDialog()){
 							facade.comprarDivisa(bankAccount, divisa, cantidad);
 							//facade.comprarDivisa(123, "Libra", 1);
 							dispose();
+							}
 						}
 
 						//	ApplicationFacadeInterfaceWS facade = StartWindow.getBusinessLogic();
@@ -184,32 +185,39 @@ public class ComprarDivisas extends JFrame {
 
 
 
+				private void keyHandler(Component c){
+					c.addKeyListener(new KeyListener() {
+						@Override
+						public void keyTyped(KeyEvent e) {			}
 
-	private void keyHandler(Component c){
-		c.addKeyListener(new KeyListener() {
-			@Override
-			public void keyTyped(KeyEvent e) {
+						@Override
+						public void keyPressed(KeyEvent e) {
+							if(e.getKeyCode() == 10)//Intro
+								comprardivisas();
+						}
 
-			}
+						@Override
+						public void keyReleased(KeyEvent e) {
 
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == 10)//Intro
-					comprardivisas();
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-
-			}
-		});
-	}
+						}
+					});
+				}
+	
+				
+				
 private JButton getJButton() {
 		if (btnComprar == null) {
 		btnComprar = new JButton("Comprar");
-		btnComprar.setBounds(164, 246, 158, 47);
+		btnComprar.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 50));
+		btnComprar.setForeground(Colors.FONTCOLOR);
+		btnComprar.setBackground(Colors.FOREGROUNDCOLOR);
+		btnComprar.setBounds(286, 899, 512, 137);
 		contentPane.add(btnComprar);
-		btnComprar.addActionListener(e -> {comprardivisas();
+		btnComprar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				comprardivisas();
+			}
 		});
 		}
 		return btnComprar;
@@ -218,7 +226,8 @@ private JButton getJButton() {
 	private void setFields(){
 
 		textDivisa = new JTextField();
-		textDivisa.setBounds(208, 71, 114, 19);
+		textDivisa.setBounds(707, 259, 346, 85);
+		textDivisa.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 40));
 		contentPane.add(textDivisa);
 		textDivisa.setColumns(10);
 		textDivisa.addFocusListener(new FocusListener() {
@@ -255,13 +264,14 @@ private JButton getJButton() {
 			e.printStackTrace();
 		}
 		*/
-		textCuenta.setBounds(208, 186, 114, 19);
+		textCuenta.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 40));
+		textCuenta.setBounds(715, 656, 338, 85);
 		contentPane.add(textCuenta);
 		textCuenta.setColumns(10);
 
 		textCantidad = new JTextField();
 		textCantidad.setText("");
-		textCantidad.setBounds(208, 128, 114, 19);
+		textCantidad.setBounds(715, 455, 338, 80);
 		contentPane.add(textCantidad);
 		textCantidad.setColumns(10);
 		textCantidad.addFocusListener(new FocusListener() {
@@ -286,20 +296,23 @@ private JButton getJButton() {
 	}
 	private void setLabels() {
 		JLabel lblComparDivisas = new JLabel("COMPAR DIVISAS");
-		lblComparDivisas.setFont(new Font("Courier 10 Pitch", Font.BOLD, 24));
-		lblComparDivisas.setBounds(140, 12, 247, 47);
+		lblComparDivisas.setFont(new Font("Courier New", Font.BOLD, 60));
+		lblComparDivisas.setBounds(297, 41, 719, 161);
 		contentPane.add(lblComparDivisas);
 
 		JLabel lblDivisa = new JLabel("Introduce Divisa");
-		lblDivisa.setBounds(35, 74, 130, 15);
+		lblDivisa.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 40));
+		lblDivisa.setBounds(116, 251, 435, 101);
 		contentPane.add(lblDivisa);
 
 		JLabel lblCantidad = new JLabel("Introduce Cantidad");
-		lblCantidad.setBounds(35, 130, 145, 15);
+		lblCantidad.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 40));
+		lblCantidad.setBounds(116, 440, 445, 101);
 		contentPane.add(lblCantidad);
 
 		JLabel lblCuenta = new JLabel("Introduce Cuenta");
-		lblCuenta.setBounds(35, 188, 145, 15);
+		lblCuenta.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 40));
+		lblCuenta.setBounds(116, 637, 505, 123);
 		contentPane.add(lblCuenta);
 	}
 

@@ -18,6 +18,7 @@ import exceptions.OverlappingOfferExists;
 //Service Implementation
 @WebService(endpointInterface = "businessLogic.ApplicationFacadeInterfaceWS")
 public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
+	//private DataAccess dB4oManager=new DataAccess();
 
 	/**
 	 * 
@@ -26,12 +27,14 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 	//Vector<Owner> owners;
 	//Vector<RuralHouse> ruralHouses;
 	//DataAccessInterface dB4oManager;
+	//DataAccess dB4oManager;
  
 
 	public FacadeImplementationWS()  {
 		
 		System.out.println("Executing FacadeImplementationWS");
 		ConfigXML c=ConfigXML.getInstance();
+
 
 		if (c.getDataBaseOpenMode().equals("initialize") && (c.isDatabaseLocal())) {
 			System.out.println("File deleted");
@@ -40,6 +43,7 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 		DataAccess dB4oManager=new DataAccess();
 		if (c.getDataBaseOpenMode().equals("initialize")) {
 			dB4oManager.initializeDB();
+			//dB4oManager.openDB();
 			}
 		else {// check if it is opened
 			 //Vector<Owner> owns=dataAccess.getOwners();
@@ -123,7 +127,7 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 
 	 public void initializeBD(){
 		
-			DataAccess dB4oManager=new DataAccess();
+		DataAccess dB4oManager=new DataAccess();
 		dB4oManager.initializeDB();
 		dB4oManager.close();
 
@@ -223,6 +227,7 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 				System.out.print("error no divisa con esas caracteristicas");
 			}
 		}
+		dB4oManager.close();
 	}
 
 
@@ -243,16 +248,8 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 						dB4oManager.ActualizarCuenta(c);
 						dB4oManager.ActualizarCuenta(cuentaorigen);
 
-
-
 						Date fecha = new Date();
 						Transferencia trans =dB4oManager.crearTrans(fecha,cuentaorigen.getNumero(),c.getNumero(),cant);
-
-
-
-
-
-
 
 						c.addTransferencia(trans);
 						cuentaorigen.addTransferencia(trans);
@@ -263,6 +260,7 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 				} else {
 					System.out.print("error no cuenta");
 				}
+		dB4oManager.close();
 			}
 
 	public Vector<Cuenta> GetCuentas(String DNI) {
@@ -291,21 +289,27 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 		/*DataAccess dB4oManager = new DataAccess();
 		Sucursal s= dB4oManager.conseguirSucursal(su);
 		Cuenta[] cuentas = s.getC();
-		Vector[]*/
+		Vector[]
 		//Vector<Operacion> operaciones= new Vector<Operacion>();
+*/
+		DataAccess dB4oManager = new DataAccess();
+		Sucursal s= dB4oManager.conseguirSucursal(su);
+		List<Cuenta> lista = dB4oManager.GetCuenta(s);
 
-		DataAccess dataManager = new DataAccess();
-		Sucursal s= dataManager.conseguirSucursal(su);
-		List<Cuenta> lista = dataManager.GetCuenta(s);
+
+		Vector<Vector<String>> result = new Vector();
+		System.out.println(lista);
 
 
-				Vector<Vector<String>> result = new Vector();
+		for(Cuenta op : lista){
 
-				for(Cuenta op : lista){
+			Vector<String> v = new Vector<String>();
+			//System.out.println(op);
 
-					Vector<String> v = new Vector<>();
 
-					v.add(op.getOperacion().toString());
+			v.add(op.getOperacion().toString());
+			System.out.println(v);
+
 					/*v.add((Float.parseFloat(op.getCantidad());
 					v.add(res.getOferta().getLastDay().toString());
 					v.add(Float.toString(res.getOferta().getPrice()));
@@ -314,7 +318,7 @@ public class FacadeImplementationWS  implements ApplicationFacadeInterfaceWS {
 					result.add(v);
 				}
 
-				dataManager.close();
+				dB4oManager.close();
 				return result;
 			}
 

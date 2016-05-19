@@ -28,9 +28,13 @@ public class DataAccess  {
 	private static DB4oManagerAux theDB4oManagerAux;
 	private static EmbeddedConfiguration configuration;
 	private static ClientConfiguration configurationCS;
+	public static final String DB4OFILENAME = "casasWS.db4o";
+	public static final int MAXNIVEL = 5;
+
 
 
 	ConfigXML c;
+
 
 	public DataAccess()  {
 
@@ -45,7 +49,7 @@ public class DataAccess  {
 			configurationCS = Db4oClientServer.newClientConfiguration();
 			configurationCS.common().activationDepth(c.getActivationDepth());
 			configurationCS.common().updateDepth(c.getUpdateDepth());
-			configurationCS.common().objectClass(RuralHouse.class).cascadeOnDelete(true);
+			//configurationCS.common().objectClass(RuralHouse.class).cascadeOnDelete(true);
 			db = Db4oClientServer.openClient(configurationCS,c.getDatabaseNode(),
 					c.getDatabasePort(),c.getUser(),c.getPassword());
 
@@ -61,6 +65,12 @@ public class DataAccess  {
 			this.offerNumber=offerNumber;
 		}
 	}
+	private void openDB() {
+		EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
+		configuration.common().activationDepth(MAXNIVEL);
+		configuration.common().updateDepth(MAXNIVEL);
+		db = Db4oEmbedded.openFile(configuration, DB4OFILENAME);
+	}
 
 
 
@@ -68,22 +78,35 @@ public class DataAccess  {
 	public void initializeDB(){
 
 		System.out.println("Db initialized");
-		Divisas d1=new Divisas(3, 100,"Dolar","Gros");
-		Divisas d2=new Divisas(5, 300,"Libra","Gros");
+		Divisas d1=new Divisas(30000, 2,"Dolar","Gros");
+		Divisas d2=new Divisas(50000, 3,"Libra","Gros");
 		Divisas d3=new Divisas(1, 30000000,"Euro","Gros");
 		Divisas[] daux = {d1, d2, d3};
 
 		Date fecha = new Date();
+		/*Operacion op1 = new Operacion(fecha,"Compra","Libra",1,1,"Gros");
+		Vector<Operacion> v = new Vector<Operacion>();
+		v.addElement(op1);*/
+		Operacion op3 = new Operacion(fecha,"Venta","Dolar",1,123,"Gros");
+		Vector<Operacion> v3 = new Vector<Operacion>();
+		v3.addElement(op3);
+
+
+		Operacion op2 = new Operacion(fecha,"Compra","Dolar",1,1,"Gros");
+		Vector<Operacion> v2 = new Vector<Operacion>();
+		v2.addElement(op2);
+
 		Operacion op1 = new Operacion(fecha,"Compra","Libra",1,1,"Gros");
 		Vector<Operacion> v = new Vector<Operacion>();
 		v.addElement(op1);
+		v.addElement(op2);
 
 		Transferencia trans = new Transferencia(fecha,1,123,1);
 		Vector<Transferencia> t = new Vector<Transferencia>();
 		t.addElement(trans);
 
 		Cuenta cuenta1= new Cuenta(1,9000,"72526101V",t,v);
-		Cuenta cuenta2= new Cuenta(123,9000,"72526101V",t,v);
+		Cuenta cuenta2= new Cuenta(123,9000,"72526101V",t,v3);
 		Cuenta[] caux = {cuenta1,cuenta2};
 
 		Cliente c1= new Cliente("Asier","Egibar","72526101V",caux);
@@ -112,7 +135,7 @@ public class DataAccess  {
 		db.commit();
 	}
 
-	public Offer createOffer(RuralHouse ruralHouse, Date firstDay, Date lastDay, float price) {
+	/*public Offer createOffer(RuralHouse ruralHouse, Date firstDay, Date lastDay, float price) {
 
 		try {
 
@@ -173,7 +196,7 @@ public class DataAccess  {
 		}
 	}
 
-
+*/
 	public void close(){
 		db.close();
 		System.out.println("DataBase closed");

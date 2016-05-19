@@ -79,13 +79,14 @@ public class Operacion {
 
     @Override
     public String toString() {
-        return "Operacion{" +
-                "fecha=" + fecha +
-                ", Operacion='" + Operacion + '\'' +
-                ", Divisa='" + Divisa + '\'' +
-                ", Cantidad=" + Cantidad +
-                ", cuenta=" + cuenta +
-                ", sucursal='" + sucursal + '\'' +
-                '}';
+        String nl = System.getProperty("line.separator");
+        return
+                "fecha=" + fecha +nl+
+                ", Operacion='" + Operacion +nl+ '\'' +
+                ", Divisa='" + Divisa +nl+ '\'' +
+                ", Cantidad=" + Cantidad +nl+
+                ", cuenta=" + cuenta +nl+
+                ", sucursal=" + sucursal + nl
+                ;
     }
 }
