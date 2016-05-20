@@ -271,6 +271,7 @@ private JButton getJButton() {
 
 		textCantidad = new JTextField();
 		textCantidad.setText("");
+		textCantidad.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 40));
 		textCantidad.setBounds(715, 455, 338, 80);
 		contentPane.add(textCantidad);
 		textCantidad.setColumns(10);

@@ -1,6 +1,7 @@
 package dataAccess;
 
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ListIterator;
@@ -31,6 +32,9 @@ public class DataAccess  {
 	public static final String DB4OFILENAME = "casasWS.db4o";
 	public static final int MAXNIVEL = 5;
 
+	private static DataAccess dB4oManager;
+	private static boolean initialized = false;
+	private static DB4oManagerServer DB4oManagerAux;
 
 
 	ConfigXML c;
@@ -38,7 +42,56 @@ public class DataAccess  {
 
 	public DataAccess()  {
 
-		c=ConfigXML.getInstance();
+		DB4oManagerAux = new DB4oManagerServer();
+		c = ConfigXML.getInstance();
+		System.out.println("Creating DB4oManager instance => isDatabaseLocal: " + c.isDatabaseLocal() + " getDatabBaseOpenMode: " + c.getDataBaseOpenMode());
+
+		if ((c.getDataBaseOpenMode().equals("initialize")) && (c.isDatabaseLocal()))
+			new File(c.getDb4oFilename()).delete();
+
+		if (c.isDatabaseLocal()) {
+			configuration = Db4oEmbedded.newConfiguration();
+			configuration.common().activationDepth(c.getActivationDepth());
+			configuration.common().updateDepth(c.getUpdateDepth());
+			db = Db4oEmbedded.openFile(configuration, c.getDb4oFilename());
+			System.out.println("DataBase opened");
+		} else // c.isDatabaseLocal==false
+		{
+			openObjectContainer();
+		}
+		if (c.getDataBaseOpenMode().equals("initialize")) {
+			/** ---------------------------------------------------------------------------------------------------- **/
+			initializeDB();
+			System.out.println("DataBase initialized");
+			initialized = true;
+		} else // c.getDataBaseOpenMode().equals("open")
+
+		{
+			ObjectSet<Object> res = db.queryByExample(DB4oManagerAux.class);
+			ListIterator<Object> listIter = res.listIterator();
+			if (listIter.hasNext())
+				DB4oManagerAux = (DB4oManagerServer) res.next();
+		}
+	}
+	public boolean isinitialized() {
+		return initialized;
+	}
+	private void openObjectContainer() {
+
+		configurationCS = Db4oClientServer.newClientConfiguration();
+		configurationCS.common().activationDepth(c.getActivationDepth());
+		configurationCS.common().updateDepth(c.getUpdateDepth());
+		db = Db4oClientServer.openClient(configurationCS, c.getDatabaseNode(), c.getDatabasePort(), c.getUser(), c.getPassword());
+
+	}
+
+
+	public static DataAccess getInstance() throws Exception {
+		if (dB4oManager == null)
+			dB4oManager = new DataAccess();
+		return dB4oManager;
+	}
+		/*c=ConfigXML.getInstance();
 
 		if (c.isDatabaseLocal()) {
 			configuration = Db4oEmbedded.newConfiguration();
@@ -55,7 +108,7 @@ public class DataAccess  {
 
 		}
 		System.out.println("Creating DB4oManager instance => isDatabaseLocal: "+c.isDatabaseLocal()+" getDatabBaseOpenMode: "+c.getDataBaseOpenMode());
-	}
+	}*/
 
 
 
@@ -65,6 +118,7 @@ public class DataAccess  {
 			this.offerNumber=offerNumber;
 		}
 	}
+	/*
 	private void openDB() {
 		EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
 		configuration.common().activationDepth(MAXNIVEL);
@@ -72,7 +126,7 @@ public class DataAccess  {
 		db = Db4oEmbedded.openFile(configuration, DB4OFILENAME);
 	}
 
-
+*/
 
 
 	public void initializeDB(){
@@ -83,7 +137,11 @@ public class DataAccess  {
 		Divisas d3=new Divisas(1, 30000000,"Euro","Gros");
 		Divisas[] daux = {d1, d2, d3};
 
-		Date fecha = new Date();
+		Date f = new Date();
+		SimpleDateFormat aux = new SimpleDateFormat("dd-MM-yyyy");
+		String fecha = aux.format(f);
+		
+		
 		/*Operacion op1 = new Operacion(fecha,"Compra","Libra",1,1,"Gros");
 		Vector<Operacion> v = new Vector<Operacion>();
 		v.addElement(op1);*/
@@ -244,7 +302,7 @@ public class DataAccess  {
 		db.commit();
 	}
 
-	public Operacion crearOp(Date f, String operacion, String moneda,float cant, int c,String su) {
+	public Operacion crearOp(String f, String operacion, String moneda,float cant, int c,String su) {
 //		Divisa d = new Divisa(moneda, 0, 0, s);
 //		Divisa divisa = (Divisa) db.queryByExample(d);
 		Operacion op = new Operacion(f, operacion, moneda, cant, c,su );
@@ -255,7 +313,7 @@ public class DataAccess  {
 		return op;
 	}
 
-	public Transferencia crearTrans(Date f,int cuentaorigen,int cuentadestino, float cant/*, Sucursal su*/) {
+	public Transferencia crearTrans(String f,int cuentaorigen,int cuentadestino, float cant/*, Sucursal su*/) {
 //		Divisa d = new Divisa(moneda, 0, 0, s);
 //		Divisa divisa = (Divisa) db.queryByExample(d);
 		Transferencia trans = new Transferencia(f,cuentaorigen, cuentadestino, cant/*, su*/);
@@ -297,7 +355,7 @@ public class DataAccess  {
 	}
 
 
-	public Vector<Transferencia> GetTransferencias(Date fecha){
+	public Vector<Transferencia> GetTransferencias(String fecha){
 		try{
 			Transferencia transferencia = new Transferencia(fecha,0,0,0);
 			ObjectSet<Transferencia> result = db.queryByExample(transferencia);

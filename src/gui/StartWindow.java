@@ -64,7 +64,7 @@ public class StartWindow extends JFrame {
 		setJMenuBar(menuBar);
 		setJMenuBar(getMenuBar_1());
 		setTitle("MOLOKOS");
-		setResizable(false);
+		setResizable(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 768, 730);
 		this.setSize(1243, 1205);

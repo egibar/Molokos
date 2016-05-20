@@ -13,13 +13,13 @@ public class Transferencia {
     /**
      *
      */
-    private Date fecha;
+    private String fecha;
     private int CuentaOrigen;
     private int CuentaDestino;
     private float Importe;
   //  private Sucursal sucursal;// CAMBIO
 
-    public Transferencia(Date fecha, int cuentaOrigen, int cuentaDestino, float importe/*, Sucursal sucursal*/) {
+    public Transferencia(String fecha, int cuentaOrigen, int cuentaDestino, float importe/*, Sucursal sucursal*/) {
         this.fecha = fecha;
         CuentaOrigen = cuentaOrigen;
         CuentaDestino = cuentaDestino;
@@ -27,11 +27,11 @@ public class Transferencia {
         //this.sucursal = sucursal;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

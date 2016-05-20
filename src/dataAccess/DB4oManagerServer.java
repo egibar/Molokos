@@ -3,6 +3,7 @@ package dataAccess;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 
@@ -159,7 +160,10 @@ public class DB4oManagerServer extends JDialog {
 		Divisas d3=new Divisas(1, 30000000,"Euro","Gros");
 		Divisas[] daux = {d1, d2, d3};
 
-		Date fecha = new Date();
+
+		Date f = new Date();
+		SimpleDateFormat aux = new SimpleDateFormat("dd-MM-yyyy");
+		String fecha = aux.format(f);
 		/*Operacion op1 = new Operacion(fecha,"Compra","Libra",1,1,"Gros");
 		Vector<Operacion> v = new Vector<Operacion>();
 		v.addElement(op1);*/

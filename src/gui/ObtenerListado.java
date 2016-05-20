@@ -14,6 +14,7 @@ import java.awt.event.*;
 import java.awt.geom.Arc2D;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Vector;
 
 public class ObtenerListado extends JFrame {
 
@@ -33,6 +34,7 @@ public class ObtenerListado extends JFrame {
     private int cuentadestino;
     private float cantidad;
     protected Component frame;
+    private JList list;
     private DefaultComboBoxModel c = new DefaultComboBoxModel();
     private Collection coleccion;
     FacadeImplementationWS facade = new FacadeImplementationWS();
@@ -60,10 +62,13 @@ public class ObtenerListado extends JFrame {
 
         setLabels();
         getOp();
-        
-        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-        tabbedPane.setBounds(145, 381, 269, 147);
-        contentPane.add(tabbedPane);
+      /*  {
+        	JList list = new JList();
+        	list.setBounds(36, 405, 1125, 612);
+        	contentPane.add(list);
+        	
+        	
+        }
         /*getO();
         setContentPane(getJContentPane());*/
 
@@ -71,9 +76,18 @@ public class ObtenerListado extends JFrame {
             @Override
             public void windowOpened(WindowEvent e) {
                 if (true) {
-
-                    coleccion = facade.GetOperaciones("Gros");
+                	coleccion = facade.GetOperaciones("Gros");
+                	/*
+                	 DefaultListModel dm = new DefaultListModel();
+                	for (int i=0; i< coleccion.size(); i++)
+                		dm.addElement(coleccion);
+                		*/
+                    //coleccion = facade.GetOperaciones("Gros");
                     for (Object v : coleccion) c.addElement(v);
+                    
+           //         list.setModel(dm);
+                    
+                    
 
                    // JOptionPane.showMessageDialog(coleccion, "Hola mundo");
                     /*coleccion = facade.GetTransferencias(fecha);
@@ -143,7 +157,7 @@ public class ObtenerListado extends JFrame {
     private JComboBox getOp() {
         if (op == null) {
             op = new JComboBox();
-            op.setBounds(26, 211, 742, 124);
+            op.setBounds(36, 211, 1125, 124);
             contentPane.add(op);
             op.setModel(c);
             /*op.addActionListener(new  ActionListener() {

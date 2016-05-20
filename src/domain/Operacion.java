@@ -13,14 +13,14 @@ public class Operacion {
     /**
      *
      */
-    private Date fecha;
+    private String fecha;
     private String Operacion;
     private String Divisa;
     private float Cantidad;
     private int cuenta;
     private String sucursal;// CAMBIO
 
-    public Operacion(Date fecha, String operacion, String divisa, float cantidad, int cuenta, String sucursal) {
+    public Operacion(String fecha, String operacion, String divisa, float cantidad, int cuenta, String sucursal) {
         this.fecha = fecha;
         Operacion = operacion;
         Divisa = divisa;
@@ -29,11 +29,11 @@ public class Operacion {
         this.sucursal = sucursal;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -81,12 +81,12 @@ public class Operacion {
     public String toString() {
         String nl = System.getProperty("line.separator");
         return
-                "fecha=" + fecha +nl+
-                ", Operacion='" + Operacion +nl+ '\'' +
-                ", Divisa='" + Divisa +nl+ '\'' +
-                ", Cantidad=" + Cantidad +nl+
-                ", cuenta=" + cuenta +nl+
-                ", sucursal=" + sucursal + nl
+                "fecha=" + fecha +//nl+
+                ", Operacion='" + Operacion +//nl+ '\'' +
+                ", Divisa='" + Divisa +//nl+ '\'' +
+                ", Cantidad=" + Cantidad +//nl+
+                ", cuenta=" + cuenta +//nl+
+                ", sucursal=" + sucursal //+ nl
                 ;
     }
 }
